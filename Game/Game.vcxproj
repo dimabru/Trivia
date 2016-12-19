@@ -76,7 +76,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="general.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="driver.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
