@@ -3,6 +3,7 @@
 #define _general
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef enum {student,editor,guide} type;
 
@@ -16,6 +17,19 @@ int inputCheck(char* str)
 		else return -1;
 	}
 	if (strlen(str) > 10) return -1;
+	return num;
+}
+
+int whileNotInt(char* str)
+{
+	int num = inputCheck(str);
+	char *arr=(char*)malloc(sizeof(1));
+	while (num == -1)
+	{
+		printf("Try again. Wrong input\n");
+		scanf("%s", arr);
+		num = inputCheck(arr);
+	}
 	return num;
 }
 

@@ -2,6 +2,8 @@
 
 int main()
 {
-	printf("%d\n",inputCheck("12345678901"));
+	int num;
+	num = whileNotInt("123a4");
+	printf("%d\n", num);
 	return 0;
 }
