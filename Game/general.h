@@ -6,6 +6,32 @@
 
 typedef enum {student,editor,guide} type;
 
+//if user is not student, GP=AVG=HS=-1, scoreList=NULL
+typedef struct{
+	char *firstName, *lastName, *ID, *password;
+	type userType;
+	int gamesPlayed, average, highScore, *scoreList;
+}user;
+
+typedef struct{
+	char *ID, *msg;
+}message;
+
+typedef struct{
+	char *str, *answer;
+	int ID, level, answered; //0 if not answered, 1 if answered
+}question;
+
+typedef struct{
+	int ID;
+	char **fakeList;
+}fakeAnswer;
+
+typedef struct{
+	int bestResult;
+	char* ID;
+}best;
+
 //function receives a string and returns a number if it consists of a positive number
 int inputCheck(char* str)
 {
@@ -47,30 +73,6 @@ int rUsure()
 	} 
 }
 
-//if user is not student, GP=AVG=HS=-1, scoreList=NULL
-typedef struct{
-	char *firstName, *lastName, *ID, *password;
-	type userType;
-	int gamesPlayed,average,highScore,*scoreList;
-}user;
 
-typedef struct{
-	char *ID, *msg;
-}message;
-
-typedef struct{
-	char *str,*answer;
-	int ID, level ,answered; //0 if not answered, 1 if answered
-}question;
-
-typedef struct{
-	int ID;
-	char **fakeList;
-}fakeAnswer;
-
-typedef struct{
-	int bestResult;
-	char* ID;
-}best;
 
 #endif
