@@ -3,7 +3,6 @@
 #define _general
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 typedef enum {student,editor,guide} type;
 
@@ -30,7 +29,22 @@ int whileNotInt(char* str)
 		scanf("%s", arr);
 		num = inputCheck(arr);
 	}
+	free(arr);
 	return num;
+}
+
+int rUsure()
+{
+	char x;
+	while (1)
+	{
+		printf("Are you sure? (enter y if yes, n if no)\n");
+		scanf("%c", &x);
+		if (x == 'y' || x == 'Y') return 1;
+		if (x == 'n' || x == 'N') return 0;
+		printf("Wrong input. Try again\n");
+		fflush(stdin);
+	} 
 }
 
 //if user is not student, GP=AVG=HS=-1, scoreList=NULL

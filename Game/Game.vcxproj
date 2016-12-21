@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="files.h" />
     <ClInclude Include="general.h" />
   </ItemGroup>
   <ItemGroup>
