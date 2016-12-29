@@ -1,13 +1,17 @@
 #include "general.h"
-#include "vld.h"
+#include "time_calculate.h"
+//#include "vld.h"
 
 int main()
 {
-	printf("delete me");
 	int num;
-	num = whileNotInt("1234");
-	printf("%d\n", num);
+
+	start_time();
+	printf("enter eny key to calculate the time\n\n");
+	getch();
+	start_end();
+	printf("its took you %d secunds\n", sum_the_time());
+	getch();
 	return 0;
 }
 
-//mnnjnjnj

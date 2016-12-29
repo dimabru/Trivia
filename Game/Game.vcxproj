@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="files.h" />
     <ClInclude Include="general.h" />
+    <ClInclude Include="time_calculate.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.c" />

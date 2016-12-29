@@ -1,8 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _general
 #define _general
+#include <time.h>
 #include <stdio.h>
 #include <string.h>
+#include "time_calculate.h"
 
 typedef enum {student,editor,guide} type;
 
