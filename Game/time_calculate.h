@@ -19,14 +19,14 @@ void start_time()
 {
 	//dont toch it some it can solve a problem in the Futures;
 	//char buffer[80];
-
+	
 	time(&rawtime);
 
 	info = localtime(&rawtime);
+	
+	time_start = (info->tm_hour)*(60 * 60) + info->tm_min*60 + info->tm_sec;
 
-	time_start = info->tm_sec;
-
-	printf("%d\n", info->tm_min);
+	printf("%d\n", time_start);
 
 
 }
@@ -37,7 +37,7 @@ void start_end()
 
 	info = localtime(&rawtime);
 
-	time_end = info->tm_sec;
+	time_end = (info->tm_hour)*(60 * 60) + info->tm_min * 60 + info->tm_sec;
 }
 
 int sum_the_time()
