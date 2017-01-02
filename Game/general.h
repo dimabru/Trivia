@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "time_calculate.h"
+#include "play.h"
+#include "guide.h"
 
 typedef enum {student,editor,guide} type;
 

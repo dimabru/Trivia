@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
-#ifndef _files
-#define _files
+#ifndef _time_calculate
+#define _time_calculate
 
 #include "general.h"
 
@@ -45,4 +45,4 @@ int sum_the_time()
 	return  time_end - time_start;
 }
 
-#endif _files
+#endif _time_calculate
