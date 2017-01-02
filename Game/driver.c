@@ -1,16 +1,16 @@
 #include "general.h"
 #include "time_calculate.h"
+#include "menus.h"
 //#include "vld.h"
 
 int main()
 {
 	int num;
 
-	start_time();
-	printf("enter eny key to calculate the time\n\n");
-	getch();
-	start_end();
-	printf("its took you %d secunds\n", sum_the_time());
+	first_menu();
+	printf("=============================\n");
+	printf("bye bye enter any key to exit\n");
+	printf("=============================\n");
 	getch();
 	return 0;
 }
