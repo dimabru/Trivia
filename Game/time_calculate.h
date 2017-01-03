@@ -25,10 +25,6 @@ void start_time()
 	info = localtime(&rawtime);
 	
 	time_start = (info->tm_hour)*(60 * 60) + info->tm_min*60 + info->tm_sec;
-
-	printf("%d\n", time_start);
-
-
 }
 
 void start_end()
