@@ -24,13 +24,13 @@
     <ClInclude Include="time_calculate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="play.h">
+    <ClInclude Include="menus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="guide.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="menus.h">
+    <ClInclude Include="play.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

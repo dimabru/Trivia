@@ -77,9 +77,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="files.h" />
+    <ClInclude Include="guide.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="general.h" />
-    <ClInclude Include="guide.h" />
     <ClInclude Include="play.h" />
     <ClInclude Include="time_calculate.h" />
   </ItemGroup>
