@@ -6,7 +6,7 @@
 int main()
 {
 	int num;
-
+	//in menus
 	first_menu();
 	printf("=============================\n");
 	printf("bye bye enter any key to exit\n");
