@@ -2,7 +2,6 @@
 #ifndef _play
 #define _play
 #include "general.h"
-#include "time_calculate.h"
 
 #define NUM_OF_QUESTION 5
 

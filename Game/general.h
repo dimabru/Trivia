@@ -1,39 +1,41 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _general
 #define _general
-#include <time.h>
+#include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include <string.h>
 #include "time_calculate.h"
 #include "play.h"
 #include "guide.h"
+#include "menus.h"
 
 typedef enum {student,editor,guide} type;
 
 //if user is not student, GP=AVG=HS=-1, scoreList=NULL
 typedef struct{
-	char *firstName, *lastName, *ID, *password;
+	char firstName[80], lastName[80], ID[11], password[80];
 	type userType;
-	int gamesPlayed, average, highScore, *scoreList;
+	int gamesPlayed, average, highScore, scoreList[80];
 }user;
 
 typedef struct{
-	char *ID, *msg;
+	char ID[11], msg[6400];
 }message;
 
 typedef struct{
-	char *str, *answer;
+	char str[6400], answer[80];
 	int ID, level, answered; //0 if not answered, 1 if answered
 }question;
 
 typedef struct{
-	int ID;
-	char **fakeList;
+	int ID,fakeAmount;
+	char fakeList[80][80];
 }fakeAnswer;
 
 typedef struct{
 	int bestResult;
-	char* ID;
+	char ID[11];
 }best;
 
 //function receives a string and returns a number if it consists of a positive number
