@@ -35,7 +35,7 @@ user* getUsers(int *size)
 	if (!fp)
 	{
 		printf("Unable to open file\n");
-		return;
+		return NULL;
 	}
 	user *list;
 	fscanf(fp,"%d", size);
