@@ -1,22 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _general
 #define _general
-#include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
-#include <string.h>
-#include "time_calculate.h"
-#include "play.h"
-#include "guide.h"
-#include "menus.h"
+#include <stdlib.h>
 
-typedef enum {student,editor,guide} type;
+typedef enum { student, editor, guide } type;
 
 //if user is not student, GP=AVG=HS=-1, scoreList=NULL
 typedef struct{
 	char firstName[80], lastName[80], ID[11], password[80];
 	type userType;
-	int gamesPlayed, average, highScore, scoreList[80];
+	int gamesPlayed, average, highScore, *scoreList;
 }user;
 
 typedef struct{
@@ -79,6 +73,51 @@ int rUsure()
 	} 
 }
 
+void printUser(user unit)
+{
+	char *x;
+	int i;
+	if (unit.userType == 0) x = "student";
+	else if (unit.userType == 1) x = "editor";
+	else x = "guide";
+	printf("first name: %s\n", unit.firstName);
+	printf("last name: %s\n", unit.lastName);
+	printf("ID: %s\n", unit.ID);
+	printf("password: %s\n", unit.password);
+	printf("user type: %s\n", x);
+	if (unit.userType == student)
+	{
+		printf("games played: %d\n", unit.gamesPlayed);
+		printf("average: %d\n", unit.average);
+		printf("high score: %d\n", unit.highScore);
+		if (unit.gamesPlayed)
+		{
+			printf("Score List:\n");
+			for (i = 0; i < unit.gamesPlayed; i++) printf("%d) %d\n", i + 1, unit.scoreList[i]);
+		}
+	}
+}
 
+user searchUser(char *id)
+{
+	int i,size=0;
+	user error,*list = getUsers(&size);
+	error.average = -1;
+	for (i = 0; i < size; i++)
+	{
+		if (!strcmp(list[i].ID, id)) return list[i];
+	}
+	return error;
+}
+
+void addUser(user newUser)
+{
+	int size;
+	user *list = getUsers(&size);
+	list = (user*)realloc(list, size + 1);
+	list[size] = newUser;
+	setUsers(list, size + 1);
+	return;
+}
 
 #endif

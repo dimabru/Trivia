@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="editor.h" />
     <ClInclude Include="files.h" />
     <ClInclude Include="guide.h" />
     <ClInclude Include="menus.h" />

@@ -1,8 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _guide
 #define _guide
-#include "general.h"
-#include "play.h"
+
 
 #define MESSAGE_SIZE 80*80
 #define MAX_SIZE 80
@@ -13,32 +12,32 @@ void student_score_list();
 int sign_in();
 void students_details();
 void average_score();
-void send_massege_to_students();
-void massege_to_developers();
-void write_instruction_in_the_first_screen();
+void send_massage_to_students();
+void massage_to_developers();
+void write_instructions_in_the_first_screen();
 int  enter_with_password();
-void guidRegister();
-void view_all_question_or_one();
+void guideRegister();
+void view_all_questions_or_one();
 
-int currect_password = 0;
+int correct_password = 0;
 
-void guid_menu()
+void guide_menu()
 {
-	//this value check if the guid loged in as he needed;
+	//this value checke if the guide logged in as he needed;
 	
 	int i = 0;
-	int get_chose = 1000;
+	int get_choose = 1000;
 
 	system("cls");
-	while (get_chose != 0)
+	while (get_choose != 0)
 	{
-		printf("1) to sign in\n");
-		printf("2) to register\n");
+		printf("1) Sign in\n");
+		printf("2) Register\n");
 		printf("3) to see student score list\n");
 		printf("4) to see students details\n");
 		printf("5) to see average score of the students\n");
-		printf("6) to send massege to students\n");
-		printf("7) to send massege to developers\n");
+		printf("6) to send massage to students\n");
+		printf("7) to send massage to developers\n");
 		printf("8) to write instruction in the first screen\n");
 		printf("9) to view all question or just one question\n");
 		printf("10)to play game\n");
@@ -47,21 +46,21 @@ void guid_menu()
 		printf("0) previous screen\n");
 
 		fflush(stdin);
-		scanf("%d", &get_chose);
+		scanf("%d", &get_choose);
 
 		//im checking here if the user enters just one letter;
-		if (get_chose <= 11)
+		if (get_choose <= 11)
 		{
-			switch (get_chose)
+			switch (get_choose)
 			{
 			case 1:
-				currect_password = sign_in();
+				correct_password = sign_in();
 				//get the user out if he is wrong;
-				if (!(currect_password))
-					get_chose = currect_password;
+				if (!(correct_password))
+					get_choose = correct_password;
 				break;
 			case 2:
-				guidRegister();
+				guideRegister();
 				break;
 				//to see student score list;
 			case 3:
@@ -77,18 +76,18 @@ void guid_menu()
 				break;
 				//to send massege to students;
 			case 6:
-				send_massege_to_students();
+				send_massage_to_students();
 				break;
 				//to send massege to developers
 			case 7:
-				massege_to_developers();
+				massage_to_developers();
 				break;
 				//to write instruction in the first screen;
 			case 8:
-				write_instruction_in_the_first_screen();
+				write_instructions_in_the_first_screen();
 				break;
 			case 9:
-				view_all_question_or_one();
+				view_all_questions_or_one();
 				break;
 				//to play game;
 			case 10:
@@ -97,17 +96,17 @@ void guid_menu()
 				break;
 				//back door;
 			case 11:
-				currect_password = !currect_password;
+				correct_password = !correct_password;
 				break;
 			default:
-				printf("you enterd illegal letter");
+				printf("you entered illegal letter");
 				break;
 			}
 		}
 		//if the user enterd illegal sentence i cleare the arry;
 		else
 		{
-			get_chose = 1000;
+			get_choose = 1000;
 			fflush(stdin);
 		}
 		//clean screen.;
@@ -117,7 +116,7 @@ void guid_menu()
 
 int sign_in()
 {
-	//if the password incurrect;
+	//if the password incorrect;
 	if (!(enter_with_password()))
 	{
 		fflush(stdin);
@@ -132,7 +131,7 @@ int sign_in()
 void student_score_list()
 {
 	//if the guid loged in as he needed;;
-	if (!(currect_password))
+	if (!(correct_password))
 	{
 		fflush(stdin);
 		printf("please log in first\n");
@@ -149,7 +148,7 @@ void student_score_list()
 void students_details()
 {
 	//if the guid loged in as he needed;
-	if (!(currect_password))
+	if (!(correct_password))
 	{
 		fflush(stdin);
 		printf("please log in first\n");
@@ -165,7 +164,7 @@ void students_details()
 void average_score()
 {
 	//if the guid loged in as he needed;
-	if (!(currect_password))
+	if (!(correct_password))
 	{
 		fflush(stdin);
 		printf("please log in first\n");
@@ -178,10 +177,10 @@ void average_score()
 	}
 }
 
-void send_massege_to_students()
+void send_massage_to_students()
 {
 	//if the guid loged in as he needed;;
-	if (!(currect_password))
+	if (!(correct_password))
 	{
 		fflush(stdin);
 		printf("please log in first\n");
@@ -197,10 +196,10 @@ void send_massege_to_students()
 	}
 }
 
-void massege_to_developers()
+void massage_to_developers()
 {
 	//if the guid loged in as he needed;;
-	if (!(currect_password))
+	if (!(correct_password))
 	{
 		fflush(stdin);
 		printf("please log in first\n");
@@ -220,10 +219,10 @@ void massege_to_developers()
 	}
 }
 
-void write_instruction_in_the_first_screen()
+void write_instructions_in_the_first_screen()
 {
 	//if the guid loged in as he needed;;
-	if (!(currect_password))
+	if (!(correct_password))
 	{
 		fflush(stdin);
 		printf("please log in first\n");
@@ -237,8 +236,8 @@ void write_instruction_in_the_first_screen()
 		fflush(stdin);
 		scanf("%s", instruction);
 
-		printf("the instruction recived\n");
-		printf("enter any key to continu\n");
+		printf("the instructions received\n");
+		printf("enter any key to continue\n");
 		getch();
 	}
 }
@@ -254,7 +253,7 @@ int enter_with_password()
 	return 0;
 }
 
-void guidRegister()
+void guideRegister()
 {
 	unsigned long id = 0;
 	printf("please enter your id\n");
@@ -290,10 +289,10 @@ void guidRegister()
 	//scoreList;
 }
 
-void view_all_question_or_one()
+void view_all_questions_or_one()
 {
-	//if the guid loged in as he needed;
-	if (!(currect_password))
+	//if the guide logged in as he needed;
+	if (!(correct_password))
 	{
 		fflush(stdin);
 		printf("please log in first\n");
@@ -302,7 +301,7 @@ void view_all_question_or_one()
 	else
 	{
 		char *get_choose_2 = (char*)malloc(sizeof(MAX_SIZE));
-		printf("1) to see all question and choose one of them\n");
+		printf("1) to see all questions and choose one of them\n");
 		printf("2) to choose one question\n");
 		fflush(stdin);
 		scanf("%s", get_choose_2);

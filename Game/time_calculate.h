@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _time_calculate
 #define _time_calculate
+#include <time.h>
 
-#include "general.h"
 
 time_t rawtime;
 //define the 

@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _play
 #define _play
-#include "general.h"
+#include "time_calculate.h"
 
 #define NUM_OF_QUESTION 5
 
@@ -77,8 +77,8 @@ int start_to_play()
 int show_question()
 {
 	///////////////////////////////////////////////////////////////////////////
-	printf("hi im a question please answere me\n");
-	getch();
+	printf("hi im a question please answer me\n");
+	_getch();
 	return 1;
 }
 

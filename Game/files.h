@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _files
 #define _files
-#include "general.h"
+
 
 void setUsers(user *list,int size)
 {
@@ -23,7 +23,40 @@ void setUsers(user *list,int size)
 		fprintf(fp, "$\n");
 	}
 	fclose(fp);
+	free(list);
 	return;
+}
+
+user* getUsers(int *size)
+{
+	int i, j, *scoreList;
+	char path[16] = "data/users.txt",ch;
+	FILE *fp = fopen(path, "r");
+	if (!fp)
+	{
+		printf("Unable to open file\n");
+		return;
+	}
+	user *list;
+	fscanf(fp,"%d", size);
+	list = (user*)malloc(sizeof(user)*(*size));
+	for (i = 0; i < *size; i++)
+	{
+		fscanf(fp, "%s", list[i].firstName);
+		fscanf(fp, "%s", list[i].lastName);
+		fscanf(fp, "%s", list[i].ID);
+		fscanf(fp, "%s", list[i].password);
+		fscanf(fp, "%d", &list[i].userType);
+		fscanf(fp, "%d", &list[i].gamesPlayed);
+		fscanf(fp, "%d", &list[i].average);
+		fscanf(fp, "%d", &list[i].highScore);
+		scoreList = (int*)malloc(sizeof(int)*list[i].gamesPlayed);
+		list[i].scoreList = scoreList;
+		for (j = 0; j < list[i].gamesPlayed; j++) fscanf(fp, "%d", &list[i].scoreList[j]);
+		fscanf(fp,"%c",&ch);
+	}
+	fclose(fp);
+	return list;
 }
 
 void setQuestions(question *list, int size)
@@ -45,6 +78,27 @@ void setQuestions(question *list, int size)
 	return;
 }
 
+question* getQuestions(int *size)
+{
+	int i;
+	char path[19] = "data/questions.txt",ch;
+	FILE *fp = fopen(path, "r");
+	question *list;
+	fscanf(fp, "%d", size);
+	list = (question*)malloc(sizeof(question)*(*size));
+	for (i = 0; i < *size; i++)
+	{
+		fscanf(fp, "%s", list[i].str);
+		fscanf(fp, "%s", list[i].answer);
+		fscanf(fp, "%d", &list[i].ID);
+		fscanf(fp, "%d", &list[i].level);
+		fscanf(fp, "%d", &list[i].answered);
+		fscanf(fp, "%c", &ch);
+	}
+	fclose(fp);
+	return list;
+}
+
 void setFakeAnswers(fakeAnswer *list,int size)
 {
 	int i,j;
@@ -60,6 +114,25 @@ void setFakeAnswers(fakeAnswer *list,int size)
 	}
 	fclose(fp);
 	return;
+}
+
+fakeAnswer* getFakeAnswers(int *size)
+{
+	int i,j;
+	char path[21] = "data/fakeAnswers.txt",ch;
+	FILE *fp = fopen(path, "r");
+	fakeAnswer *list;
+	fscanf(fp, "%d", size);
+	list = (fakeAnswer*)malloc(sizeof(fakeAnswer)*(*size));
+	for (i = 0; i < *size; i++)
+	{
+		fscanf(fp, "%d", &list[i].ID);
+		fscanf(fp, "%d", &list[i].fakeAmount);
+		for (j = 0; j < list[i].fakeAmount; j++) fscanf(fp, "%s", list[i].fakeList[j]);
+		fscanf(fp, "%c", &ch);
+	}
+	fclose(fp);
+	return list;
 }
 
 void setMessages(message *list, int size)
@@ -78,6 +151,24 @@ void setMessages(message *list, int size)
 	return;
 }
 
+message* getMessages(int *size)
+{
+	int i;
+	char path[18] = "data/messages.txt",ch;
+	FILE *fp = fopen(path, "r");
+	message *list;
+	fscanf(fp, "%d", size);
+	list = (message*)malloc(sizeof(message)*(*size));
+	for (i = 0; i < *size; i++)
+	{
+		fscanf(fp, "%s", list[i].ID);
+		fscanf(fp, "%s", list[i].msg);
+		fscanf(fp, "%c", &ch);
+	}
+	fclose(fp);
+	return list;
+}
+
 void setBest(best *list, int size)
 {
 	int i;
@@ -94,6 +185,24 @@ void setBest(best *list, int size)
 	return;
 }
 
+best* getBest(int *size)
+{
+	int i;
+	char path[20] = "data/bestResult.txt",ch;
+	FILE *fp = fopen(path, "r");
+	best *list;
+	fscanf(fp, "%d", size);
+	list = (best*)malloc(sizeof(best)*(*size));
+	for (i = 0; i < *size; i++)
+	{
+		fscanf(fp, "%d", &list[i].bestResult);
+		fscanf(fp, "%s", list[i].ID);
+		fscanf(fp, "%c", &ch);
+	}
+	fclose(fp);
+	return list;
+}
+
 void setInstructions(char *msg)
 {
 	char path[22] = "data/instructions.txt";
@@ -103,11 +212,21 @@ void setInstructions(char *msg)
 	return;
 }
 
+char* getInstructions()
+{
+	char path[22] = "data/instructions.txt",msg[6400];
+	FILE *fp = fopen(path, "r");
+	fscanf(fp, "%s", msg);
+	fclose(fp);
+	return msg;
+}
+
 void setCommentsForDev(char *msg)
 {
 	char path[26] = "data/comments_for_dev.txt";
 	FILE *fp = fopen(path, "a");
 	fprintf(fp, "%s\n", msg);
+	fprintf(fp, "$\n");
 	fclose(fp);
 	return;
 }
