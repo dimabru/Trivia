@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _play
 #define _play
-#include "general.h"
 #include "time_calculate.h"
 
 #define NUM_OF_QUESTION 5
@@ -14,11 +13,11 @@ int start_to_play()
 	int i = 0;
 	int sum = 0;
 	int score = 0;
-	int temp = 0, secLeft = 0,houre = 0;
+	int temp = 0, secLeft = 0, houre = 0;
 	start_time();
-	
 
-	for (i = 0; i < NUM_OF_QUESTION;i++)
+
+	for (i = 0; i < NUM_OF_QUESTION; i++)
 	{
 		sum += show_question();
 	}
@@ -57,7 +56,7 @@ int start_to_play()
 	{
 		printf("your score is %d\n", sum);
 		score = sum;
-	} 
+	}
 	houre = sum_the_time() / 3600;
 	temp = sum_the_time();
 	printf("its took you %d hour", houre);
@@ -78,8 +77,8 @@ int start_to_play()
 int show_question()
 {
 	///////////////////////////////////////////////////////////////////////////
-	printf("hi im a question please answere me\n");
-	getch();
+	printf("hi im a question please answer me\n");
+	_getch();
 	return 1;
 }
 
