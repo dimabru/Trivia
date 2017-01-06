@@ -1,17 +1,19 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "general.h"
-#include "time_calculate.h"
 #include "menus.h"
+#include "play.h"
+
 //#include "vld.h"
 
 int main()
 {
-	int num;
+	int num,i,size;
 	//in menus
 	first_menu();
 	printf("=============================\n");
 	printf("bye bye enter any key to exit\n");
 	printf("=============================\n");
-	getch();
+	_getch();
 
 	return 0;
 }

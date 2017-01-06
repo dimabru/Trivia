@@ -76,15 +76,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="editor.h" />
     <ClInclude Include="files.h" />
     <ClInclude Include="guide.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="general.h" />
     <ClInclude Include="play.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="time_calculate.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\users.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef _time_calculate
 #define _time_calculate
+#include <time.h>
 
-#include "general.h"
 
 time_t rawtime;
 //define the 
@@ -17,13 +17,11 @@ void time_now()
 
 void start_time()
 {
-	//dont toch it some it can solve a problem in the Futures;
-	//char buffer[80];
-	
 	time(&rawtime);
 
 	info = localtime(&rawtime);
 	
+	//convert the time to sec;
 	time_start = (info->tm_hour)*(60 * 60) + info->tm_min*60 + info->tm_sec;
 }
 
@@ -32,7 +30,7 @@ void start_end()
 	time(&rawtime);
 
 	info = localtime(&rawtime);
-
+	//convert the time to sec;
 	time_end = (info->tm_hour)*(60 * 60) + info->tm_min * 60 + info->tm_sec;
 }
 

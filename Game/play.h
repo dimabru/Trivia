@@ -15,7 +15,7 @@ int start_to_play()
 	int score = 0;
 	int temp = 0, secLeft = 0, houre = 0;
 	start_time();
-
+	
 
 	for (i = 0; i < NUM_OF_QUESTION; i++)
 	{
@@ -56,7 +56,7 @@ int start_to_play()
 	{
 		printf("your score is %d\n", sum);
 		score = sum;
-	}
+	} 
 	houre = sum_the_time() / 3600;
 	temp = sum_the_time();
 	printf("its took you %d hour", houre);
