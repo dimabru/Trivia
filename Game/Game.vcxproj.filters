@@ -33,10 +33,10 @@
     <ClInclude Include="play.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="editor.h">
+    <ClInclude Include="test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,9 +44,51 @@
     <ClCompile Include="driver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="editor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="files.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="general.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="guide.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="play.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="time_calculate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\users.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="data\bestResult.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="data\comments_for_dev.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="data\instructions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="data\messages.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="data\questions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="data\fakeAnswers.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

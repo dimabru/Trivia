@@ -7,9 +7,12 @@
 
 int main()
 {
-	int num,i,size;
+	int num,i,size=0;
 	//in menus
 	first_menu();
+	//user *list = getUsers(&size);
+	//printUserList(list, size);
+	//printf("%s\n", list[0].firstName);
 	printf("=============================\n");
 	printf("bye bye enter any key to exit\n");
 	printf("=============================\n");
