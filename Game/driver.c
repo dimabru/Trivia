@@ -7,7 +7,7 @@
 
 int main()
 {
-	int num, i, size = 0;
+	int num,i,size=0;
 	//in menus
 	first_menu();
 	//user *list = getUsers(&size);
@@ -19,5 +19,5 @@ int main()
 	_getch();
 
 	return 0;
-	//
 }
+
