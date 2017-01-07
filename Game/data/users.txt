@@ -1,4 +1,4 @@
-3
+4
 Dima
 Brusilovsky
 313026221
@@ -22,6 +22,15 @@ Brusilovsky
 313026148
 abc123
 1
+0
+0
+0
+$
+dolev
+ben
+123
+123
+2
 0
 0
 0

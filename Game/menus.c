@@ -110,6 +110,7 @@ void loginScreen(type uType)
 	system("cls");
 	fflush(stdin);
 	printf("*********%s Log in***********\n", UT);
+	printf("you have 3 attempts\n", UT);
 	while (attempts < 3)
 	{
 		printf("Enter ID:\n");
