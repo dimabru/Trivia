@@ -134,8 +134,16 @@ void addQuestion(question q, fakeAnswer fa)
 	int size = 0,i;
 	question *qList = getQuestions(&size),*newQ;
 	fakeAnswer *faList = getFakeAnswers(&size),*newFA;
-	q.ID = qList[size-1].ID+1;
-	fa.ID = faList[size-1].ID+1;
+	if (size)
+	{
+		q.ID = qList[size - 1].ID + 1;
+		fa.ID = faList[size - 1].ID + 1;
+	}
+	else
+	{
+		q.ID = 0;
+		fa.ID = 0;
+	}
 	if (size)
 	{
 		newQ = (question*)malloc(sizeof(question)*(size + 1));

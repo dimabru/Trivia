@@ -16,9 +16,8 @@ void editor_menu(user edit)
 		printf("5) View user data\n");
 		printf("6) View general average\n");
 		printf("7) Change a question\n");
-		printf("8) Back\n");
-		printf("9) Log off\n");
-		printf("10) Quit\n");
+		printf("8) Log off\n");
+		printf("9) Quit\n");
 		do{
 			scanf("%s", temp);
 			selection = whileNotInt(temp);
