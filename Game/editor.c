@@ -18,7 +18,7 @@ void editor_menu(user edit)
 		printf("7) Change a question\n");
 		printf("8) Log off\n");
 		printf("9) Quit\n");
-		do{
+		do{ 
 			scanf("%s", temp);
 			selection = whileNotInt(temp);
 			if (selection < 1 || selection>10) printf("Wrong input. Try again\n");

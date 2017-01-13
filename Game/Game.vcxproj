@@ -82,6 +82,7 @@
     <ClInclude Include="menus.h" />
     <ClInclude Include="general.h" />
     <ClInclude Include="play.h" />
+    <ClInclude Include="student.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="time_calculate.h" />
   </ItemGroup>
@@ -93,6 +94,7 @@
     <ClCompile Include="guide.c" />
     <ClCompile Include="menus.c" />
     <ClCompile Include="play.c" />
+    <ClCompile Include="student.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="time_calculate.c" />
   </ItemGroup>

@@ -143,9 +143,13 @@ void loginScreen(type uType)
 		_getch();
 		return;
 	}
-	editor_menu(found);
+	if (uType == student) student_menu(found);
+	else if (uType == editor) editor_menu(found);
+	else guide_menu(found);
+
 	return;
 }
+
 
 void registerScreen(type uType)
 {
@@ -182,5 +186,17 @@ void registerScreen(type uType)
 	addUser(newUser);
 	printf("Press any key to continue\n");
 	_getch();
-	editor_menu(newUser);
+
+	if (uType == student)
+	{
+		student_menu(newUser);
+	}
+	else if (uType == editor)
+	{
+		editor_menu(newUser);
+	}
+	else
+	{
+		guide_menu(newUser);
+	}
 }

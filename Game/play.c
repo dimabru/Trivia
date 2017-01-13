@@ -71,8 +71,12 @@ int start_to_play()
 
 int show_question()
 {
-	///////////////////////////////////////////////////////////////////////////
-	printf("hi im a question please answer me\n");
+	int size = 0;
+	int sizeFake = 0;
+	question* list = getQuestions(&size);
+	fakeAnswer* fake = getFakeAnswers(&sizeFake);
+	
+	printf("%s", list[0].str);
 	_getch();
 	return 1;
 }
