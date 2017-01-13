@@ -83,9 +83,12 @@ void printQuestion(question q)
 {
 	printf("ID: %d\n\n", q.ID);
 	printf("%s\n", q.str);
+	printf("%s\n", q.answer);
 	printf("************************\n");
 	return;
 }
+
+
 
 void printQuestionList(question* list, int size)
 {

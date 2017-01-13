@@ -1,6 +1,5 @@
 #include "play.h"
-
-int show_question();
+#define MAX_SIZE 80
 
 int start_to_play()
 {
@@ -69,14 +68,77 @@ int start_to_play()
 	return score;
 }
 
+question sortQ(int *indexFake)
+{
+	int size,i;
+	static int level = 1;
+	static int index = -1;
+	question *list = getQuestions(&size);
+	question error;
+	error.level = -1;
+	while (level < 11)
+	{
+		for (i = 0; i < size; i++)
+		{
+			if (list[i].level == level && i>index)
+			{
+				index = i;
+				*indexFake = i;
+				return list[i];
+			}
+		}
+		index = -1;
+		level++;
+	}
+	level = 1;
+	return error;
+}
+
 int show_question()
 {
-	int size = 0;
-	int sizeFake = 0;
-	question* list = getQuestions(&size);
-	fakeAnswer* fake = getFakeAnswers(&sizeFake);
-	
-	printf("%s", list[0].str);
-	_getch();
-	return 1;
+	int size = 0, indexFake = 0,i;
+	question show = sortQ(&indexFake);
+	fakeAnswer *fake = getFakeAnswers(&size);
+	fakeAnswer current;
+	char getAnswer[MAX_SIZE];
+	int random = 0;
+	//for the for loop to know if we use correct answer;
+	int flagCorrect = 0;
+	int flagFake = 0;
+	int save_correct_answer = 0;
+
+	printf("%s\n", show.str);
+
+	current = fake[indexFake];
+
+	int c = current.fakeAmount;
+
+	random = rand();
+	random = random % current.fakeAmount;
+
+	for (i = 0; i < current.fakeAmount + 1; i++)
+	{
+		if (i < current.fakeAmount)
+		{
+			printf("%d) %s\n", i, current.fakeList[i]);
+			flagFake = 1;
+		}
+		if (i == random && flagCorrect == 0 && flagFake == 0)
+		{
+			printf("%d) %s\n", i, show.answer);
+			flagCorrect = 1;
+			save_correct_answer = i;
+		}
+		flagFake = 0;
+	}
+
+	fflush(stdin);
+	scanf("%s", getAnswer);
+
+	if (getAnswer == i)
+	{
+		return show.level;
+	}
+	return 0;
 }
+
