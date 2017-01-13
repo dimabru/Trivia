@@ -114,7 +114,7 @@ int show_question()
 	int c = current.fakeAmount;
 
 	random = rand();
-	random = random % current.fakeAmount;
+	random = random % current.fakeAmount + 1;
 
 	for (i = 0; i < current.fakeAmount + 1; i++)
 	{
@@ -128,6 +128,7 @@ int show_question()
 			printf("%d) %s\n", i, show.answer);
 			flagCorrect = 1;
 			save_correct_answer = i;
+			i--;
 		}
 		flagFake = 0;
 	}
