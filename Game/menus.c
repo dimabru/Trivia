@@ -47,7 +47,7 @@ void first_menu()
 				break;
 			}
 		}
-		//if the user enterd illegal sentence I clear the array;
+		//if the user entered illegal sentence I clear the array;
 		else
 		{
 			printf("Wrong input. Try again\n");
@@ -104,9 +104,9 @@ void loginScreen(type uType)
 	int attempts = 0;
 	user found;
 	char ID[80], UT[80], pass[80];
-	if (uType == student) strcpy(UT, "student");
-	else if (uType == editor) strcpy(UT, "editor");
-	else strcpy(UT, "guide");
+	if (uType == student) strcpy(UT, "Student");
+	else if (uType == editor) strcpy(UT, "Editor");
+	else strcpy(UT, "Guide");
 	system("cls");
 	fflush(stdin);
 	printf("*********%s Log in***********\n", UT);
@@ -121,7 +121,7 @@ void loginScreen(type uType)
 		printf("\nNo such ID. Try again please\n");
 		fflush(stdin);
 	}
-	if (found.average == -1)
+	if (found.average == -1 || found.userType != uType)
 	{
 		printf("Failed to enter correct ID\n");
 		_getch();
@@ -150,14 +150,13 @@ void loginScreen(type uType)
 	return;
 }
 
-
 void registerScreen(type uType)
 {
 	user newUser, found;
 	char UT[80], ID[80];
-	if (uType == student) strcpy(UT, "student");
-	else if (uType == editor) strcpy(UT, "editor");
-	else strcpy(UT, "guide");
+	if (uType == student) strcpy(UT, "Student");
+	else if (uType == editor) strcpy(UT, "Editor");
+	else strcpy(UT, "Guide");
 	system("cls");
 	fflush(stdin);
 	printf("*********%s Register***********\n", UT);
@@ -174,10 +173,13 @@ void registerScreen(type uType)
 	strcpy(newUser.ID, ID);
 	printf("First name: ");
 	scanf("%s", newUser.firstName);
+	fflush(stdin);
 	printf("Last name: ");
 	scanf("%s", newUser.lastName);
+	fflush(stdin);
 	printf("Password: ");
 	scanf("%s", newUser.password);
+	fflush(stdin);
 	newUser.userType = uType;
 	newUser.gamesPlayed = 0;
 	newUser.average = 0;

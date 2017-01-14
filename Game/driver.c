@@ -9,9 +9,9 @@ int main()
 {
 	int num,i,size=0;
 	//in menus
-	//first_menu();
+	first_menu();
 	
-	start_to_play();
+	//start_to_play();
 	//user *list = getUsers(&size);
 	//printUserList(list, size);
 	//printf("%s\n", list[0].firstName);

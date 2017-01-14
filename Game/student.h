@@ -6,5 +6,6 @@
 #include "menus.h"
 void student_menu(user stud);
 int view_current_record(char*);
+void menu_receivemsg(char*);
 
 #endif

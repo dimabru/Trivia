@@ -21,8 +21,8 @@ void editor_menu(user edit)
 		do{ 
 			scanf("%s", temp);
 			selection = whileNotInt(temp);
-			if (selection < 1 || selection>10) printf("Wrong input. Try again\n");
-		} while (selection < 1 || selection>10);
+			if (selection < 1 || selection>9) printf("Wrong input. Try again\n");
+		} while (selection < 1 || selection>9);
 		switch (selection)
 		{
 		case 1:
@@ -33,6 +33,23 @@ void editor_menu(user edit)
 		case 3:
 			menu_deleteQuestion();
 			break;
+		case 4:
+			menu_studentScore();
+			break;
+		case 5:
+			menu_userData();
+			break;
+		case 6:
+			menu_average();
+			break;
+		case 7:
+			menu_changeQuestion();
+			break;
+		case 8:
+			return;
+		case 9:
+			printf("Have a nice day\n");
+			exit(0);
 		}
 	}
 }
@@ -84,9 +101,10 @@ void menu_addQuestion()
 
 void menu_deleteQuestion()
 {
-	question remove;
+	question remove,*list;
 	char temp[80];
 	long selection,id;
+	int size;
 	system("cls");
 	printf("*****************Delete Question*******************\n");
 	printf("Select one of the following options\n");
@@ -107,8 +125,141 @@ void menu_deleteQuestion()
 		id = whileNotInt(temp);
 		remove = searchQuestion(id);
 		if (remove.ID == -1) printf("Question doesn't exist\n");
-		else removeQuestion(remove);
+		else
+		{
+			removeQuestion(remove);
+			printf("Question removed. Press any key to continue\n");
+		}
 		_getch();
 		break;
+	case 2:
+		list = getQuestions(&size);
+		printQuestionList(list, size);
+		printf("Enter ID of a question to remove\n");
+		fflush(stdin);
+		scanf("%s", temp);
+		id = whileNotInt(temp);
+		remove = searchQuestion(id);
+		if (remove.ID == -1) printf("Question doesn't exist\n");
+		else
+		{
+			removeQuestion(remove);
+			printf("Question removed. Press any key to continue\n");
+		}
+		_getch();
+	}
+}
+
+void menu_studentScore()
+{
+	int i,size=0;
+	best *list = getBest(&size);
+	user current;
+	system("cls");
+	printf("*****************Student Score*******************\n");
+	if (size == 0) printf("No scores to show\n");
+	else
+	{
+		printf("List of student's Best Results:\n\n");
+		for (i = 0; i < size; i++)
+		{
+			current = searchUser(list[i].ID);
+			printf("First Name: %s\n", current.firstName);
+			printf("Last Name: %s\n", current.lastName);
+			printf("ID: %s\n", current.ID);
+			printf("Best Result: %d\n", list[i].bestResult);
+			printf("*****************************\n");
+		}
+	}
+	printf("Press any key to continue\n");
+	_getch();
+	return;
+}
+
+void menu_userData()
+{
+	printf("*****************Student data list*******************\n");
+	int size = 0;
+	user *list = getUsers(&size);
+	printStudentList(list, size);
+	printf("Press any key to continue\n");
+	_getch();
+}
+
+void menu_average()
+{
+	float avg = getAverage();
+	char ch;
+	system("cls");
+	printf("*****************General Average*******************\n");
+	if (avg == 0) printf("No average to show. No games played yet\n");
+	else
+	{
+		printf("General average: %.2f\n\n", avg);
+	}
+	printf("Enter 0 if you wish to erase all game data from all students and reset scores.\n");
+	printf("To quit enter anything else\n");
+	fflush(stdin);
+	scanf("%c", &ch);
+	if (ch == '0' && rUsure())
+	{
+		resetScores();
+		printf("Operation completed successfully\n");
+	}
+	fflush(stdin);
+	printf("Press any key to continue\n");
+	_getch();
+	return;
+}
+
+void menu_changeQuestion()
+{
+	question change, *list;
+	char temp[80];
+	long selection, id;
+	int size;
+	system("cls");
+	printf("*****************Change Question*******************\n");
+	printf("Select one of the following options\n");
+	printf("1) Search a question using ID\n");
+	printf("2) Select a question from list\n");
+	do{
+		fflush(stdin);
+		scanf("%s", temp);
+		selection = whileNotInt(temp);
+		if (selection < 1 || selection>2) printf("Wrong input. Try again\n");
+	} while (selection < 1 || selection>2);
+	switch (selection)
+	{
+	case 1:
+		printf("Enter ID of a question to change\n");
+		fflush(stdin);
+		scanf("%s", temp);
+		id = whileNotInt(temp);
+		change = searchQuestion(id);
+		if (change.ID == -1) printf("Question doesn't exist\n");
+		else
+		{
+			changeQuestion(change);
+			printf("Question removed. Press any key to continue\n");
+		}
+		_getch();
+		break;
+	case 2:
+		system("cls");
+		list = getQuestions(&size);
+		printQuestionList(list, size);
+		printf("Enter ID of a question to change\n");
+		fflush(stdin);
+		scanf("%s", temp);
+		id = whileNotInt(temp);
+		change = searchQuestion(id);
+		if (change.ID == -1) printf("Question doesn't exist\n");
+		else
+		{
+			changeQuestion(change);
+			printf("Question removed. Press any key to continue\n");
+		}
+		_getch();
 	}
 }

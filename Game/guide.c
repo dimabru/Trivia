@@ -1,307 +1,214 @@
 #include "guide.h"
 
-int correct_password = 0;
-
-void guide_menu()
+void guide_menu(user gid)
 {
-	//this value checke if the guide logged in as he needed;
+	char temp[80];
+	int selection;
+	while (1)
+	{
+		system("cls");
+		printf("***********Guide: %s %s***************\n", gid.firstName, gid.lastName);
+		printf("Select one of the following options\n");
+		printf("1) Play game\n");
+		printf("2) Edit game instructions\n");
+		printf("3) View student score\n");
+		printf("4) View user data\n");
+		printf("5) View questions data\n");
+		printf("6) View general average\n");
+		printf("7) Send message to student\n");
+		printf("8) Send message to R&D team\n");
+		printf("9) Log off\n");
+		printf("10) Quit\n");
+		do{
+			scanf("%s", temp);
+			selection = whileNotInt(temp);
+			if (selection < 1 || selection>10) printf("Wrong input. Try again\n");
+		} while (selection < 1 || selection>10);
+		switch (selection)
+		{
+		case 1:
+			break;
+		case 2:
+			menu_instructions();
+			break;
+		case 3:
+			menu_studentScore(); //located in editor.h
+			break;
+		case 4:
+			menu_userData(); //located in editor.h
+			break;
+		case 5:
+			menu_viewQuestions();
+			break;
+		case 6:
+			menu_average(); //located in editor.h
+			break;
+		case 7:
+			menu_sendMessage();
+			break;
+		case 8:
+			menu_RD();
+		case 9:
+			return;
+		case 10:
+			printf("Have a nice day\n");
+			exit(0);
+		}
+	}
+}
 
-	int i = 0;
-	int get_choose = 1000;
-
+void menu_instructions()
+{
+	char msg[1000],ch[80];
 	system("cls");
-	while (get_choose != 0)
-	{
-		printf("1) Sign in\n");
-		printf("2) Register\n");
-		printf("3) to see student score list\n");
-		printf("4) to see students details\n");
-		printf("5) to see average score of the students\n");
-		printf("6) to send massage to students\n");
-		printf("7) to send massage to developers\n");
-		printf("8) to write instruction in the first screen\n");
-		printf("9) to view all question or just one question\n");
-		printf("10)to play game\n");
-		//delete this shit as soon as you can;
-		printf("11) play game\n");
-		printf("0) previous screen\n");
-
-		fflush(stdin);
-		scanf("%d", &get_choose);
-
-		//im checking here if the user enters just one letter;
-		if (get_choose <= 11)
-		{
-			switch (get_choose)
-			{
-			case 1:
-				correct_password = sign_in();
-				//get the user out if he is wrong;
-				if (!(correct_password))
-					get_choose = correct_password;
-				break;
-			case 2:
-				guideRegister();
-				break;
-				//to see student score list;
-			case 3:
-				student_score_list();
-				break;
-				//to see students details
-			case 4:
-				students_details();
-				break;
-				//to see average score of the students
-			case 5:
-				average_score();
-				break;
-				//to send massege to students;
-			case 6:
-				send_massage_to_students();
-				break;
-				//to send massege to developers
-			case 7:
-				massage_to_developers();
-				break;
-				//to write instruction in the first screen;
-			case 8:
-				write_instructions_in_the_first_screen();
-				break;
-			case 9:
-				view_all_questions_or_one();
-				break;
-				//to play game;
-			case 10:
-				//in "play.h";
-				start_to_play();
-				break;
-				//back door;
-			case 11:
-				correct_password = !correct_password;
-				break;
-			default:
-				printf("you entered illegal letter");
-				break;
-			}
-		}
-		//if the user enterd illegal sentence i cleare the arry;
-		else
-		{
-			get_choose = 1000;
-			fflush(stdin);
-		}
-		//clean screen.;
-		system("cls");
-	}
-}
-
-int sign_in()
-{
-	//if the password incorrect;
-	if (!(enter_with_password()))
-	{
-		fflush(stdin);
-		printf("incorrect password enter any key to continue\n");
-		getch();
-		system("cls");
-		return 0;
-	}
-	return 1;
-}
-
-void student_score_list()
-{
-	//if the guid loged in as he needed;;
-	if (!(correct_password))
-	{
-		fflush(stdin);
-		printf("please log in first\n");
-		getch();
-	}
+	printf("***********Set instructions***************\n");
+	strcpy(msg, getInstructions());
+	printf("The instructions are for all students to see when entering program\n");
+	if (!strcmp(msg, "None")) printf("There are no instructions at the moment\n");
 	else
 	{
-		//////////////////////////////////////////////////////////////////////
-		//here we need to show student from struct;
+		printf("Current instructions:\n");
+		printf("%s\n", msg);
 	}
+	fflush(stdin);
+	printf("1) Edit instructions\n");
+	printf("2) Reset instructions\n");
+	printf("Anything else to return to menu\n");
+	scanf("%s", &ch);
+	if (ch[0] == '1' && ch[1]=='\0')
+	{
+		printf("Enter new message to display:\n");
+		strcpy(msg, scanSentence());
+		if (rUsure())
+		{
+			setInstructions(msg);
+			printf("Instructions succesfully changed\n");
+		}
+	}
+	else if (ch[0] == '2' && ch[1] == '\0')
+	{
+		setInstructions("None");
+		printf("Reset succesfull\n");
+	}
+	printf("Press any key to continue\n");
+	_getch();
+}
+
+void menu_viewQuestions()
+{
+	int size,i,j;
+	question *q = getQuestions(&size);
+	fakeAnswer *fa = getFakeAnswers(&size);
+	system("cls");
+	printf("***********View Questions***************\n");
+	if (!size) printf("No questions to present\n");
+	else
+	{
+		printf("List of questions:\n************\n");
+		for (i = 0; i < size; i++)
+		{
+			printQuestion(q[i]);
+			printf("Fake answers:\n");
+			for (j = 0; j < fa[i].fakeAmount; j++) printf("%s\n", fa[i].fakeList[j]);
+			printf("*******************\n");
+		}
+	}
+	printf("Press any key to continue\n");
+	_getch();
 	return;
 }
 
-void students_details()
+void menu_sendMessage()
 {
-	//if the guid loged in as he needed;
-	if (!(correct_password))
-	{
-		fflush(stdin);
-		printf("please log in first\n");
-		getch();
-	}
-	else
-	{
-		//////////////////////////////////////////////////////////////////////
-		//here we need to show student details from struct;
-	}
-}
-
-void average_score()
-{
-	//if the guid loged in as he needed;
-	if (!(correct_password))
-	{
-		fflush(stdin);
-		printf("please log in first\n");
-		getch();
-	}
-	else
-	{
-		//////////////////////////////////////////////////////////////////////
-		//here we need to show student average from struct;
-	}
-}
-
-void send_massage_to_students()
-{
-	//if the guid loged in as he needed;;
-	if (!(correct_password))
-	{
-		fflush(stdin);
-		printf("please log in first\n");
-		getch();
-	}
-	else
-	{
-		//////////////////////////////////////////////////////////////////////
-		//here we need to show students from struct;
-		//then let the guid chose one;
-		//if exist more then one show relevent student;
-		//lot of work here.................;
-	}
-}
-
-void massage_to_developers()
-{
-	//if the guid loged in as he needed;;
-	if (!(correct_password))
-	{
-		fflush(stdin);
-		printf("please log in first\n");
-		getch();
-	}
-	else
-	{
-		//////////////////////////////////////////////////////////////////////
-		char message_for_dev[MESSAGE_SIZE];
-		printf("please enter your message\n");
-		fflush(stdin);
-		scanf("%s", message_for_dev);
-
-		printf("the message recived\n");
-		printf("enter any key to continu\n");
-		getch();
-	}
-}
-
-void write_instructions_in_the_first_screen()
-{
-	//if the guid loged in as he needed;;
-	if (!(correct_password))
-	{
-		fflush(stdin);
-		printf("please log in first\n");
-		getch();
-	}
-	else
-	{
-		//////////////////////////////////////////////////////////////////////
-		char instruction[MESSAGE_SIZE];
-		printf("please enter your message\n");
-		fflush(stdin);
-		scanf("%s", instruction);
-
-		printf("the instructions received\n");
-		printf("enter any key to continue\n");
-		getch();
-	}
-}
-
-int enter_with_password()
-{
-	char get_pass[MAX_SIZE];
-	printf("please enter your password\n");
-	scanf("%s", get_pass);
-
-	//here we need to check if the password is ture;
-
-	return 0;
-}
-
-void guideRegister()
-{
-	unsigned long id = 0;
-	printf("please enter your id\n");
+	char ch[80],fname[80],lname[80],msg[1000],id[80];
+	int size,i,cnt=0;
+	user *list = getUsers(&size),found;
+	message m;
 	fflush(stdin);
-	scanf("%d", id);
-	//here we need to enter the id to data base;
-
-	char user_name[MAX_SIZE];
-	printf("please enter your name\n");
-	fflush(stdin);
-	scanf("%s", user_name);
-	//here we need to enter the name to data base;
-
-	char user_last_name[MAX_SIZE];
-	printf("please enter your last name\n");
-	fflush(stdin);
-	scanf("%s", user_last_name);
-	//here we need to enter the last name to data base;
-
-	char get_pass[MAX_SIZE];
-	printf("please enter your password\n");
-	scanf("%s", get_pass);
-	//here we need to enter the password to data base;
-
-	//user type is guid;
-
-	//games played = 0;
-
-	//averege = 0;
-
-	//highScore = 0;
-
-	//scoreList;
-}
-
-void view_all_questions_or_one()
-{
-	//if the guide logged in as he needed;
-	if (!(correct_password))
+	system("cls");
+	printf("***********Send Message***************\n");
+	printf("Select one of the following options\n");
+	printf("1) Search student by name\n");
+	printf("2) Search student by ID\n");
+	printf("Enter anything else to return to menu\n");
+	scanf("%s", ch);
+	if (ch[0] == '1' && ch[1] == '\0')
 	{
-		fflush(stdin);
-		printf("please log in first\n");
-		getch();
-	}
-	else
-	{
-		char *get_choose_2 = (char*)malloc(sizeof(MAX_SIZE));
-		printf("1) to see all questions and choose one of them\n");
-		printf("2) to choose one question\n");
-		fflush(stdin);
-		scanf("%s", get_choose_2);
-		if (whileNotInt(get_choose_2) == 1)
+		printf("Enter first name: ");
+		scanf("%s", fname);
+		printf("Enter last name: ");
+		scanf("%s", lname);
+		for (i = 0; i < size; i++)
 		{
-			//////////////////////////////////////////////////////////////////////
-			//here we need to show the questions from the struct;
+			if (!strcmp(list[i].firstName, fname) && !strcmp(list[i].lastName, lname) && list[i].userType==student)
+			{
+				found = list[i];
+				cnt++;
+			}
 		}
-		else if (whileNotInt(get_choose_2) == 2)
+		if (!cnt)
 		{
-			//////////////////////////////////////////////////////////////////////
-			//here we need to show specific question from the struct;
+			printf("No such student\n");
+			printf("Press any key to continue\n");
+			_getch();
+			return;
+		}
+		else if (cnt == 1)
+		{
+			printf("Enter message for %s %s\n", fname, lname);
+			strcpy(msg, scanSentence());
 		}
 		else
 		{
-			printf("you enterd illegal value\n");
-			printf("please enter any key to cuntinue\n");
-			getch();
+			printf("Found several users with same name. Enter ID\n");
+			scanf("%s", id);
+			found = searchUser(id);
+			if (found.average != -1 && found.userType == student)
+			{
+				printf("Enter message for %s %s\n", found.firstName, found.lastName);
+				strcpy(msg, scanSentence());
+			}
+			else
+			{
+				printf("Failed to find ID\n");
+				printf("Press any key to continue\n");
+				_getch();
+				return;
+			}
 		}
-		free(get_choose_2);
+		strcpy(m.msg, msg);
+		strcpy(m.ID, found.ID);
+		addMessage(m);
 	}
+	if (ch[0] == '2' && ch[1] == '\0')
+	{
+		printf("Enter ID\n");
+		scanf("%s", id);
+		found = searchUser(id);
+		if (found.average != -1 && found.userType == student)
+		{
+			printf("Enter message for %s %s\n", found.firstName, found.lastName);
+			strcpy(msg, scanSentence());
+		}
+		else printf("Failed to find ID\n");
+		strcpy(m.msg, msg);
+		strcpy(m.ID, found.ID);
+		addMessage(m);
+	}
+	printf("Press any key to continue\n");
+	_getch();
+	return;
+}
+
+void menu_RD()
+{
+	char msg[1000];
+	printf("***********Message to R&D***************\n");
+	printf("Enter message for reasearch and development team\n");
+	strcpy(msg,scanSentence());
+	setCommentsForDev(msg);
+	printf("Message sent\n");
+	printf("Press any key to continue\n");
+	_getch();
+	return;
 }

@@ -52,7 +52,6 @@ void printUser(user unit)
 	printf("first name: %s\n", unit.firstName);
 	printf("last name: %s\n", unit.lastName);
 	printf("ID: %s\n", unit.ID);
-	printf("password: %s\n", unit.password);
 	printf("user type: %s\n", x);
 	if (unit.userType == student)
 	{
@@ -67,6 +66,23 @@ void printUser(user unit)
 	}
 }
 
+void printStudent(user unit)
+{
+	int i;
+	printf("first name: %s\n", unit.firstName);
+	printf("last name: %s\n", unit.lastName);
+	printf("ID: %s\n", unit.ID);
+	printf("games played: %d\n", unit.gamesPlayed);
+	printf("average: %d\n", unit.average);
+	printf("high score: %d\n", unit.highScore);
+	if (unit.gamesPlayed)
+	{
+		printf("Score List:\n");
+		for (i = 0; i < unit.gamesPlayed; i++) printf("%d) %d\n", i + 1, unit.scoreList[i]);
+	}
+	return;
+}
+
 void printUserList(user* list, int size)
 {
 	int i;
@@ -79,16 +95,32 @@ void printUserList(user* list, int size)
 	}
 }
 
-void printQuestion(question q)
+void printStudentList(user *list, int size)
 {
-	printf("ID: %d\n\n", q.ID);
-	printf("%s\n", q.str);
-	printf("%s\n", q.answer);
-	printf("************************\n");
+	int i,cnt=0;
+	system("cls");
+	printf("List of users:\n");
+	for (i = 0; i < size; i++)
+	{
+		if (list[i].userType == student)
+		{
+			cnt++;
+			printUser(list[i]);
+			printf("*******************************\n");
+		}
+	}
+	if (!cnt) printf("No students in database\n");
 	return;
 }
 
-
+void printQuestion(question q)
+{
+	printf("ID: %d\n\n", q.ID);
+	printf("Level: %d\n", q.level);
+	printf("%s\n", q.str);
+	printf("Correct Answer: %s\n", q.answer);
+	return;
+}
 
 void printQuestionList(question* list, int size)
 {
@@ -99,7 +131,11 @@ void printQuestionList(question* list, int size)
 		return;
 	}
 	printf("List of questions:\n************\n");
-	for (i = 0; i < size; i++) printQuestion(list[i]);
+	for (i = 0; i < size; i++)
+	{
+		printQuestion(list[i]);
+		printf("************\n");
+	}
 	return;
 }
 
@@ -237,5 +273,110 @@ void removeQuestion(question q)
 		setFakeAnswers(newFA, size - 1);
 	}
 	else resetQuestions();
+	return;
+}
+
+int getAverage()
+{
+	int size = 0,i;
+	user *list = getUsers(&size);
+	float amount = 0,sum=0;
+	for (i = 0; i < size; i++)
+	{
+		if (list[i].userType == student)
+		{
+			amount++;
+			sum += list[i].average;
+		}
+	}
+	if (!amount) return 0;
+	return sum / amount;
+}
+
+void resetScores()
+{
+	int size = 0, i,j;
+	setBest(NULL, 0);
+	user *list = getUsers(&size);
+	for (i = 0; i < size; i++)
+	{
+		list[i].average = 0;
+		free(list[i].scoreList);
+		list[i].gamesPlayed = 0;
+		list[i].highScore = 0;
+	}
+	return;
+}
+
+void changeQuestion(question q)
+{
+	int i,amount;
+	question nq;
+	char temp[80];
+	long level;
+	fakeAnswer fa,f=searchFakeAnswer(q.ID);
+	system("cls");
+	printf("Current question information:\n");
+	printQuestion(q);
+	printf("Fake answers:\n");
+	for (i = 0; i < f.fakeAmount; i++) printf("%s\n", f.fakeList[i]);
+	printf("************************\n");
+	printf("Enter the changed question:\n");
+	strcpy(nq.str, scanSentence());
+	printf("Select level of question from 1 to 10 (1 is the easiest, 10 is the hardest)\n");
+	do{
+		fflush(stdin);
+		scanf("%s", temp);
+		level = whileNotInt(temp);
+		if (level < 1 || level>10) printf("Wrong input. Try again\n");
+	} while (level < 1 || level>10);
+	nq.level = level;
+	printf("Enter correct answer: ");
+	strcpy(nq.answer, scanSentence());
+	printf("How many fake answers do you wish to give? (no more than 5)\n");
+	do{
+		scanf("%s", temp);
+		amount = whileNotInt(temp);
+		if (amount < 1 || amount > 5) printf("Wrong input. Try again\n");
+	} while (amount < 1 || amount > 5);
+	fa.fakeAmount = amount;
+	for (i = 0; i < amount; i++)
+	{
+		printf("Enter fake answer number %d: ", i + 1);
+		do{
+			strcpy(fa.fakeList[i], scanSentence());
+			if (!strcmp(q.answer, fa.fakeList[i])) printf("That is the correct answer. Try again\n");
+		} while (!strcmp(q.answer, fa.fakeList[i]));
+	}
+	fa.ID = q.ID;
+	nq.ID = q.ID;
+	nq.answered = 0;
+	removeQuestion(q);
+	addQuestion(nq, fa);
+	return;
+}
+
+void addMessage(message m)
+{
+	int i, size = 0,j;
+	message *list = getMessages(&size);
+	message *nlist;
+	for (i = 0; i < size; i++) if (!strcmp(m.ID, list[i].ID)) break;
+	if (i == size)
+	{
+		nlist = (message*)malloc(sizeof(message)*(size + 1));
+		for (j = 0; j < size; j++) nlist[j] = list[j];
+		nlist[size] = m;
+		free(list);
+		setMessages(nlist, size + 1);
+		free(nlist);
+	}
+	else
+	{
+		strcpy(list[i].msg, m.msg);
+		setMessages(list, size);
+		free(list);
+	}
+	printf("Message added succesfully\n");
 	return;
 }

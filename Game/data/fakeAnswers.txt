@@ -1,4 +1,4 @@
-10
+9
 0
 1
 Created fake answer1
@@ -27,16 +27,11 @@ $
 1
 Created fake answer7
 $
-7
-1
-Created fake answer8
-$
-8
-1
-Created fake answer9
-$
 9
 1
 Created fake answer10
-
+$
+10
+1
+Fake Answer
 $

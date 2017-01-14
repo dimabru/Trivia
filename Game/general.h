@@ -37,33 +37,25 @@ typedef struct{
 
 //function receives a string and returns a number if it consists of a positive number
 long inputCheck(char*);
-
 long whileNotInt(char*);
-
 int rUsure();
-
 void printUser(user);
-
 void printUserList(user*, int);
-
+void printStudent(user);
+void printStudentList(user*, int);
 user searchUser(char*);
-
 void addUser(user);
-
 void addQuestion(question, fakeAnswer);
-
 char* scanSentence();
-
 char* fscanfSentence(FILE*);
-
 question searchQuestion(int);
-
 fakeAnswer searchFakeAnswer(int);
-
 void removeQuestion(question);
-
 void printQuestion(question);
-
 void printQuestionList(question*,int);
+int getAverage();
+void resetScores();
+void changeQuestion(question);
+void addMessage(message);
 
 #endif
