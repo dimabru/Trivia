@@ -4,6 +4,7 @@
 
 #include "general.h"
 #include "menus.h"
+#include "play.h"
 void student_menu(user stud);
 int view_current_record(char*);
 void menu_receivemsg(char*);

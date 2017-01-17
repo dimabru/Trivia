@@ -4,7 +4,7 @@
 #include "play.h"
 
 //#include "vld.h"
-
+//shg
 int main()
 {
 	int num,i,size=0;

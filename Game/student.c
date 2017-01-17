@@ -23,7 +23,7 @@ void student_menu(user stud)
 		{
 		case 1:
 			system("cls");
-			printf("playing the game\n");
+			start_to_play();
 			break;
 		case 2:
 			BestRes = view_current_record(&stud.ID);
