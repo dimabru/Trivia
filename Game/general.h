@@ -27,7 +27,7 @@ typedef struct{
 
 typedef struct{
 	int ID,fakeAmount;
-	char fakeList[80][80];
+	char fakeList[1000][1000];
 }fakeAnswer;
 
 typedef struct{
