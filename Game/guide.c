@@ -115,6 +115,11 @@ void menu_viewQuestions()
 	}
 	printf("Press any key to continue\n");
 	_getch();
+	if (size)
+	{
+		free(q);
+		free(fa);
+	}
 	return;
 }
 
@@ -197,6 +202,7 @@ void menu_sendMessage()
 	}
 	printf("Press any key to continue\n");
 	_getch();
+	if (size) free(list);
 	return;
 }
 

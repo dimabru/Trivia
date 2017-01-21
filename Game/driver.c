@@ -2,8 +2,8 @@
 #include "general.h"
 #include "menus.h"
 #include "play.h"
-#include "MinUnit.h"
-//#include "vld.h"
+//#include "MinUnit.h"
+#include "vld.h"
 
 /*MU_TEST(test_getUsers)
 {
@@ -25,8 +25,8 @@ int main()
 	//in menus
 	//MU_RUN_SUITE(test_getUsers);
 	//MU_REPORT();
-	first_menu();
-	
+	//first_menu();
+	searchUser("123");
 	//start_to_play();
 	//user *list = getUsers(&size);
 	//printUserList(list, size);

@@ -62,6 +62,7 @@ int view_current_record(char* id_user)
 	{
 		if (!strcmp(list[i].ID, id_user)) return list[i].bestResult;
 	}
+	if (size) free(list);
 	return -1;
 }
 
@@ -82,5 +83,6 @@ void menu_receivemsg(char* id)
 	}
 	printf("Press any key to continue\n");
 	_getch();
+	if (size) free(list);
 	return;
 }

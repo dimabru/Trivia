@@ -20,6 +20,11 @@ void setUsers(user *list, int size)
 		fprintf(fp, "$\n");
 	}
 	fclose(fp);
+	for (i = 0; i < size; i++)
+	{
+		if (list[i].gamesPlayed) free(list[i].scoreList);
+	}
+	if (size) free(list);
 	return;
 }
 
@@ -90,6 +95,7 @@ void setQuestions(question *list, int size)
 		fprintf(fp, "$\n");
 	}
 	fclose(fp);
+	if (size) free(list);
 	return;
 }
 
@@ -143,6 +149,7 @@ void setFakeAnswers(fakeAnswer *list, int size)
 		fprintf(fp, "$\n");
 	}
 	fclose(fp);
+	if (size) free(list);
 	return;
 }
 
@@ -180,6 +187,7 @@ void setMessages(message *list, int size)
 		fprintf(fp, "$\n");
 	}
 	fclose(fp);
+	if (size) free(list);
 	return;
 }
 
@@ -216,6 +224,7 @@ void setBest(best *list, int size)
 		fprintf(fp, "$\n");
 	}
 	fclose(fp);
+	if (size) free(list);
 	return;
 }
 

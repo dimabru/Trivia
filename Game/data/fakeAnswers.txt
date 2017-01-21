@@ -1,5 +1,5 @@
-30
-0
+31
+1
 3
 1
 3
@@ -92,61 +92,61 @@ For prevent a function delete data
 To present comments to the user
 None of the answers are correct
 $
-15
+14
 4
 When a function returns 0 or NULL
 When a function initialize not correctly a parameter
 Answers 1+2 are correct
 There is no correct answer
 $
-16
+15
 3
 When there are a lot of functions
 Before initializing of parameter
 When the class is an abstract class
 $
-17
+16
 4
 QA
 QA+Developers
 The manager of the project
 designated team
 $
-18
+17
 3
 Assembler
 C
 SQL
 $
-19
+18
 4
 C
 CPP
 Assembler
 java
 $
-20
+19
 4
 The code of the compiler
 A code which uses i abstract class
 A code of object oriented language
 Code written in a specific language
 $
-21
+20
 4
 A class that have methods of initializing
 A built-in class
 There is no such a class
 A class which includes an inline function
 $
-22
+21
 4
 It doing actions in the function without return value
 It linked between two functions
 It keeping value without doing actions on it and return it
 It initial the values received
 $
-23
+22
 5
 SQL
 C#
@@ -154,28 +154,28 @@ java
 C
 Assembler
 $
-24
+23
 4
 For method without parametets received
 In an abstract class
 When the function does not calculate value
 When we want to use this function more times
 $
-25
+24
 4
 ByteCode
 Arcitecture process
 All the answer are correct
 Templating
 $
-26
+25
 4
 Interpreter
 SSD
 Abstract program
 debugger
 $
-27
+26
 5
 A+
 WW
@@ -183,7 +183,7 @@ WA
 WR
 R
 $
-28
+27
 5
 The developers
 QA
@@ -191,21 +191,25 @@ QA+devalopers
 The manager of the project
 Designated team
 $
-29
+28
 3
 <NULL> func()
 static func()
 func()
 $
-30
+29
 3
 stdio.h
 stddef.h
 math.h
 $
-31
+30
 3
 .
 &
 *
+$
+31
+1
+The process of restructuring existing computer code without changing its external behaviour
 $
