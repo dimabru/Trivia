@@ -25,8 +25,8 @@ int main()
 	//in menus
 	//MU_RUN_SUITE(test_getUsers);
 	//MU_REPORT();
-	//first_menu();
-	searchUser("123");
+	first_menu();
+	//searchUser("123");
 	//start_to_play();
 	//user *list = getUsers(&size);
 	//printUserList(list, size);

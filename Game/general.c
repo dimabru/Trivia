@@ -147,6 +147,7 @@ user searchUser(char *id)
 	int i, size = 0,j;
 	user error, *list = getUsers(&size),found;
 	error.average = -1;
+	error.gamesPlayed = 0;
 	for (i = 0; i < size; i++)
 	{
 		if (!strcmp(list[i].ID, id))
