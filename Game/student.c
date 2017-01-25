@@ -1,5 +1,5 @@
 #include "student.h"
-
+/*This function print the menu for a student and calls functions according the option the student enterd*/
 void student_menu(user stud)
 {
 	char temp[80], con;
@@ -51,7 +51,8 @@ void student_menu(user stud)
 		}
 	}
 }
-
+/*This function returns the record of the user received.
+If it isn't exist- returns -1 check of the unit testingggggg*/
 int view_current_record(char* id_user)
 {
 	int size, i;
@@ -65,7 +66,7 @@ int view_current_record(char* id_user)
 	if (size) free(list);
 	return -1;
 }
-
+/*This function represent the message the guide had write to the student with the id received*/
 void menu_receivemsg(char* id)
 {
 	int size,i;

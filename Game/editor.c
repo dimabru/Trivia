@@ -1,5 +1,5 @@
 #include "editor.h"
-
+/*This function print the menu for an editor and calls functions according the option the editor enterd*/
 void editor_menu(user edit)
 {
 	char temp[80];
@@ -54,13 +54,13 @@ void editor_menu(user edit)
 		}
 	}
 }
-
+/*Adding a question-The user will enter the attributes of a question he wants to add and it will send be to the function addQuestion*/
 void menu_addQuestion()
 {
 	question q;
 	fakeAnswer fa;
 	char temp[80],ch,str[1000];
-	int i = 0;
+	int i = 0,ptr;
 	long level,amount;
 	system("cls");
 	printf("*****************Add Question*******************\n");
@@ -97,11 +97,11 @@ void menu_addQuestion()
 		} while (!strcmp(q.answer, fa.fakeList[i]));
 	}
 	fflush(stdin);
-	addQuestion(q, fa);
-	_getch();
+	ptr=addQuestion(q, fa);
+	_getch(); 
 	return;
 }
-
+/*deleting a question-The user will enter the attributes of question he wants to delete and it will be send to the function removeQuestion*/
 void menu_deleteQuestion()
 {
 	question remove,*list;
@@ -152,7 +152,7 @@ void menu_deleteQuestion()
 		_getch();
 	}
 }
-
+//This function prints the list of the student's best result
 void menu_studentScore()
 {
 	int i,size=0;
@@ -179,7 +179,7 @@ void menu_studentScore()
 	if (size) free(list);
 	return;
 }
-
+//This function prints the data of the users exist
 void menu_userData()
 {
 	printf("*****************Student data list*******************\n");
@@ -189,7 +189,8 @@ void menu_userData()
 	printf("Press any key to continue\n");
 	_getch();
 }
-
+/*This function prints the average of the users exist.
+It also has the option of reset the scores*/
 void menu_average()
 {
 	float avg = getAverage();
@@ -215,7 +216,8 @@ void menu_average()
 	_getch();
 	return;
 }
-
+/*changeQuestion- If the question's id the user entered exists it will be send to changeQuestion
+There is also an option of search question from list */
 void menu_changeQuestion()
 {
 	question change, *list;

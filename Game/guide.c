@@ -1,5 +1,6 @@
 #include "guide.h"
-
+/*This function print menu of a guide and receives from the guide the option he choose
+It call function according his input*/
 void guide_menu(user gid)
 {
 	char temp[80];
@@ -56,9 +57,10 @@ void guide_menu(user gid)
 		}
 	}
 }
-
+/*This function receives instruction from the user with using the functions  setInstructions and getInstructions */
 void menu_instructions()
 {
+	int res;
 	char msg[1000],ch[80];
 	system("cls");
 	printf("***********Set instructions***************\n");
@@ -81,22 +83,24 @@ void menu_instructions()
 		strcpy(msg, scanSentence());
 		if (rUsure())
 		{
-			setInstructions(msg);
-			printf("Instructions succesfully changed\n");
+			res=setInstructions(msg);
+			if (res)
+				printf("Instructions succesfully changed\n");
 		}
 	}
 	else if (ch[0] == '2' && ch[1] == '\0')
 	{
-		setInstructions("None");
-		printf("Reset succesfull\n");
+		res=setInstructions("None");
+		if (res)
+			printf("Reset succesfull\n");
 	}
 	printf("Press any key to continue\n");
 	_getch();
 }
-
+/*This function represents the questions (and their fake answers) exist*/
 void menu_viewQuestions()
 {
-	int size,i,j;
+	int size,i,j,prt;
 	question *q = getQuestions(&size);
 	fakeAnswer *fa = getFakeAnswers(&size);
 	system("cls");
@@ -107,10 +111,13 @@ void menu_viewQuestions()
 		printf("List of questions:\n************\n");
 		for (i = 0; i < size; i++)
 		{
-			printQuestion(q[i]);
-			printf("Fake answers:\n");
-			for (j = 0; j < fa[i].fakeAmount; j++) printf("%s\n", fa[i].fakeList[j]);
-			printf("*******************\n");
+			prt = printQuestion(q[i]);
+			if (prt)
+			{
+				printf("Fake answers:\n");
+				for (j = 0; j < fa[i].fakeAmount; j++) printf("%s\n", fa[i].fakeList[j]);
+				printf("*******************\n");
+			}
 		}
 	}
 	printf("Press any key to continue\n");
@@ -122,11 +129,11 @@ void menu_viewQuestions()
 	}
 	return;
 }
-
+/*This function represents the menu of setting instructions to a choosen student*/
 void menu_sendMessage()
 {
 	char ch[80],fname[80],lname[80],msg[1000],id[80];
-	int size,i,cnt=0;
+	int size,i,cnt=0,prt;
 	user *list = getUsers(&size),found;
 	message m;
 	fflush(stdin);
@@ -183,7 +190,8 @@ void menu_sendMessage()
 		}
 		strcpy(m.msg, msg);
 		strcpy(m.ID, found.ID);
-		addMessage(m);
+		if (found.average != -1)
+			prt = addMessage(m);
 	}
 	if (ch[0] == '2' && ch[1] == '\0')
 	{
@@ -198,22 +206,27 @@ void menu_sendMessage()
 		else printf("Failed to find ID\n");
 		strcpy(m.msg, msg);
 		strcpy(m.ID, found.ID);
-		addMessage(m);
+		if (found.average != -1)
+			addMessage(m);
 	}
 	printf("Press any key to continue\n");
 	_getch();
 	if (size) free(list);
 	return;
 }
-
+/*This function represents the menu of setting messages to the developers*/
 void menu_RD()
 {
+	int res;
 	char msg[1000];
 	printf("***********Message to R&D***************\n");
 	printf("Enter message for reasearch and development team\n");
 	strcpy(msg,scanSentence());
-	setCommentsForDev(msg);
-	printf("Message sent\n");
+	res=setCommentsForDev(msg);
+	if (res)
+	{
+		printf("Message sent\n");
+	}
 	printf("Press any key to continue\n");
 	_getch();
 	return;

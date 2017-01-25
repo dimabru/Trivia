@@ -1,10 +1,16 @@
 #include "files.h"
-
-void setUsers(user *list, int size)
+//This function prints to the file "users.txt" the list received according the amount received
+/*
+If the file won't open - it returns 0
+If the printing will success- it returns 1
+*/
+int setUsers(user *list, int size)
 {
 	int i, j;
 	char path[16] = "data/users.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "%d\n", size);
 	for (i = 0; i < size; i++)
 	{
@@ -25,9 +31,14 @@ void setUsers(user *list, int size)
 		if (list[i].gamesPlayed) free(list[i].scoreList);
 	}
 	if (size) free(list);
-	return;
+	//return;
+	return 1;
 }
-
+//This function scans from the file "users.txt" a list of users
+/*
+If the file won't open - it will return NULL
+If the scanning will success- it will return the list
+*/
 user* getUsers(int *size)
 {
 	int i, j, *scoreList;
@@ -61,29 +72,45 @@ user* getUsers(int *size)
 	fclose(fp);
 	return list;
 }
-
-void resetUsers()
+/*
+This function reset the file users.txt and their attributes from bestResult.txt,messages.txt
+If one of the files wont open- It will return 0
+If the reseting will success- it will return 1
+*/
+int resetUsers()
 {
 	char path[80] = "data/users.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp,"0");
 	fclose(fp);
 	strcpy(path, "data/bestResult.txt");
 	fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "0");
 	fclose(fp);
 	strcpy(path, "data/messages.txt");
 	fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "0");
 	fclose(fp);
-	return;
+	return 1;
 }
-
-void setQuestions(question *list, int size)
+/*
+This function prints to the file "questions.txt" the list received according the amount received
+If the file won't open - it returns 0
+If the printing will success- it returns 1
+*/
+int setQuestions(question *list, int size)
 {
 	int i;
 	char path[19] = "data/questions.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "%d\n", size);
 	for (i = 0; i < size; i++)
 	{
@@ -96,15 +123,24 @@ void setQuestions(question *list, int size)
 	}
 	fclose(fp);
 	if (size) free(list);
-	return;
+	return 1;
 }
 
+//This function scans from the file "questions.txt" a list of users
+/*
+If the file won't open - it will return NULL
+If the scanning will success- it will return the list
+*/
 question* getQuestions(int *size)
 {
 	int i;
+	question* list;
+	list = NULL;
 	char path[19] = "data/questions.txt", ch='\0';
 	FILE *fp = fopen(path, "r");
-	question *list;
+	if (fp == NULL)
+		return list;
+	
 	fscanf(fp, "%d", size);
 	if (*size == 0) list = NULL;
 	else list = (question*)malloc(sizeof(question)*(*size));
@@ -121,25 +157,37 @@ question* getQuestions(int *size)
 	fclose(fp);
 	return list;
 }
-
-void resetQuestions()
+/*
+This function reset the file question.txt and their attributes from fakeAnswers.txt
+If one of the files wont open- It will return 0
+If the reseting will success- it will return 1
+*/
+int resetQuestions()
 {
 	char path[80] = "data/questions.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "0");
 	fclose(fp);
 	strcpy(path, "data/fakeAnswers.txt");
 	fp = fopen(path, "w");
 	fprintf(fp, "0");
 	fclose(fp);
-	return;
+	return 1;
 }
-
-void setFakeAnswers(fakeAnswer *list, int size)
+/*
+This function prints to the file "fakeAnswers.txt" the list received according the amount received
+If the file won't open - it returns 0
+If the printing will success- it returns 1
+*/
+int setFakeAnswers(fakeAnswer *list, int size)
 {
 	int i, j;
 	char path[21] = "data/fakeAnswers.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "%d\n", size);
 	for (i = 0; i < size; i++)
 	{
@@ -150,15 +198,24 @@ void setFakeAnswers(fakeAnswer *list, int size)
 	}
 	fclose(fp);
 	if (size) free(list);
-	return;
+	return 1;
 }
 
+//This function scans from the file "fakeAnswers.txt" a list of users
+/*
+If the file won't open - it will return NULL
+If the scanning will success- it will return the list
+*/
 fakeAnswer* getFakeAnswers(int *size)
 {
 	int i, j;
+	fakeAnswer* list;
+	list = NULL;
 	char path[21] = "data/fakeAnswers.txt", ch='\0';
 	FILE *fp = fopen(path, "r");
-	fakeAnswer *list;
+	if (fp == NULL)
+		return list;
+	
 	fscanf(fp, "%d", size);
 	if (*size == 0) list = NULL;
 	else list = (fakeAnswer*)malloc(sizeof(fakeAnswer)*(*size));
@@ -173,12 +230,18 @@ fakeAnswer* getFakeAnswers(int *size)
 	fclose(fp);
 	return list;
 }
-
-void setMessages(message *list, int size)
+/*
+This function prints to the file "messages.txt" the list received according the amount received
+If the file won't open - it returns 0
+If the printing will success- it returns 1
+*/
+int setMessages(message *list, int size)
 {
 	int i;
 	char path[18] = "data/messages.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "%d\n", size);
 	for (i = 0; i < size; i++)
 	{
@@ -188,15 +251,23 @@ void setMessages(message *list, int size)
 	}
 	fclose(fp);
 	if (size) free(list);
-	return;
+	return 1;
 }
-
+//This function scans from the file "messages.txt" a list of users
+/*
+If the file won't open - it will return NULL
+If the scanning will success- it will return the list
+*/
 message* getMessages(int *size)
 {
 	int i;
+	message *list;
+	list = NULL;
 	char path[18] = "data/messages.txt", ch='\0';
 	FILE *fp = fopen(path, "r");
-	message *list;
+	if (fp == NULL)
+		return list;
+	
 	fscanf(fp, "%d", size);
 	if (*size == 0) list = NULL;
 	else list = (message*)malloc(sizeof(message)*(*size));
@@ -210,12 +281,18 @@ message* getMessages(int *size)
 	fclose(fp);
 	return list;
 }
-
-void setBest(best *list, int size)
+/*
+This function prints to the file "bestResult.txt" the list received according the amount received
+If the file won't open - it returns 0
+If the printing will success- it returns 1
+*/
+int setBest(best *list, int size)
 {
 	int i;
 	char path[20] = "data/bestResult.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "%d\n", size);
 	for (i = 0; i < size; i++)
 	{
@@ -225,9 +302,12 @@ void setBest(best *list, int size)
 	}
 	fclose(fp);
 	if (size) free(list);
-	return;
+	return 1;
 }
-
+/*This function returns the list of the Best scores of the users according the amount received
+if the file won't open- it will return NULL
+if the scanning will sucesses it will return the list
+*/
 best* getBest(int *size)
 {
 	int i;
@@ -235,6 +315,8 @@ best* getBest(int *size)
 	FILE *fp = fopen(path, "r");
 	best *list;
 	fscanf(fp, "%d", size);
+	if (fp == NULL)
+		return fp;
 	if (*size == 0) list = NULL;
 	else list = (best*)malloc(sizeof(best)*(*size));
 	for (i = 0; i < *size; i++)
@@ -247,43 +329,70 @@ best* getBest(int *size)
 	fclose(fp);
 	return list;
 }
-
-void setInstructions(char *msg)
+//This function prints to the file instructions.txt the msg received
+/*
+if the file wont open- it will return 0
+if the printing will sucess it will return 1
+*/
+int setInstructions(char *msg)
 {
 	char path[22] = "data/instructions.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "%s\n", msg);
 	fclose(fp);
-	return;
+	return 1;
 }
-
+//This function scans from the file "instructions.txt" a msg
+/*
+If the file won't open - it will return NULL
+If the scanning will success- it will return the msg
+*/
 char* getInstructions()
 {
 	char path[22] = "data/instructions.txt", msg[6400];
 	FILE *fp = fopen(path, "r");
+	if (fp==NULL)
+		return fp;
 	strcpy(msg, fscanfSentence(fp));
 	fclose(fp);
 	return msg;
 }
-
-void setCommentsForDev(char *msg)
+//This function prints to the file comments_for_dev.txt the msg received
+/*
+if the file wont open- it will return 0
+if the printing will sucess it will return 1
+*/
+int setCommentsForDev(char *msg)
 {
 	char path[26] = "data/comments_for_dev.txt";
 	FILE *fp = fopen(path, "a");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "%s\n", msg);
 	fprintf(fp, "$\n");
 	fclose(fp);
-	return;
+	return 1;
 }
-
-void resetAll()
+/*
+This function reset the file comments_for_dev.txt 
+If the file wont open- It will return 0
+If the reseting will success- it will return 1
+*/
+int resetAll()
 {
+	int res;
 	char path[26] = "data/comments_for_dev.txt";
 	FILE *fp = fopen(path, "w");
+	if (fp == NULL)
+		return 0;
 	fprintf(fp, "");
 	fclose(fp);
-	resetUsers();
-	resetQuestions();
-	setInstructions("None");
-	return;
+	res=resetUsers();
+	if (res)
+		res = resetQuestions();
+	if(res)
+		res=setInstructions("None");
+	return 1;
 }

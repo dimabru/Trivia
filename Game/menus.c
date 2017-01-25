@@ -1,8 +1,9 @@
 #include "menus.h"
-
+/*This function represents the first menu for the user
+It includes choosing of the user type*/
 void first_menu()
 {
-	int i = 0;
+	int i = 0,res;
 	char get_choose[MAX_SIZE],ch;
 
 	while (get_choose[0] != 'e')
@@ -34,9 +35,11 @@ void first_menu()
 				printf("1 - reset Users. 2 - reset Questions. 3 - reset All. 4 - set created questions\n");
 				scanf("%c", &ch);
 				fflush(stdin);
-				if (ch == '1'&&rUsure()) resetUsers();
-				if (ch == '2'&&rUsure()) resetQuestions();
-				if (ch == '3'&&rUsure()) resetAll();
+				if (ch == '1'&&rUsure()) 
+					res=resetUsers();
+				if (ch == '2'&&rUsure()) 
+					res=resetQuestions();
+				if (ch == '3'&&rUsure()) res=resetAll();
 				if (ch == '4'&&rUsure()) testQuestions();
 				break;
 			case 'e':
@@ -62,7 +65,7 @@ void first_menu()
 		system("cls");
 	}
 }
-
+/*This function represents The option the the user after choosing user type*/
 void loginORregister(type uType)
 {
 	char temp[80];
@@ -98,7 +101,8 @@ void loginORregister(type uType)
 		}
 	}
 }
-
+/*This function is the login option- the user has 3 attemps
+If he won't success- it will back the previous screen*/
 void loginScreen(type uType)
 {
 	int attempts = 0;
@@ -150,11 +154,14 @@ void loginScreen(type uType)
 
 	return;
 }
-
+/*This function is the register option- 
+If the user exists there is a message
+If the user doesn't exist - the user will be add the users exist*/
 void registerScreen(type uType)
 {
 	user newUser, found;
 	char UT[80], ID[80];
+	int ch;
 	if (uType == student) strcpy(UT, "Student");
 	else if (uType == editor) strcpy(UT, "Editor");
 	else strcpy(UT, "Guide");
@@ -186,7 +193,7 @@ void registerScreen(type uType)
 	newUser.average = 0;
 	newUser.highScore = 0;
 	newUser.scoreList = NULL;
-	addUser(newUser);
+	ch=addUser(newUser);
 	printf("Press any key to continue\n");
 	_getch();
 
