@@ -117,6 +117,7 @@ void loginScreen(type uType)
 		scanf("%s", ID);
 		found = searchUser(ID);
 		if (found.average != -1 && found.userType == uType) break;
+		if (found.gamesPlayed) free(found.scoreList);
 		attempts++;
 		printf("\nNo such ID. Try again please\n");
 		fflush(stdin);

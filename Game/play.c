@@ -57,7 +57,7 @@ int start_to_play()
 	secLeft = temp - houre * 3600;
 	//min
 	temp = secLeft / 60;
-	printf(" %d minuet", temp);
+	printf(" %d minute", temp);
 
 	temp = secLeft - temp * 60;
 	printf(" %d second\n", temp);
@@ -74,7 +74,7 @@ question sortQ(int *indexFake)
 	static int level = 1;
 	static int index = -1;
 	question *list = getQuestions(&size);
-	question error;
+	question error,found;
 	error.level = -1;
 	while (level < 11)
 	{
@@ -84,7 +84,9 @@ question sortQ(int *indexFake)
 			{
 				index = i;
 				*indexFake = i;
-				return list[i];
+				found = list[i];
+				free(list);
+				return found;
 			}
 		}
 		index = -1;
@@ -140,6 +142,7 @@ int show_question()
 	{
 		return show.level;
 	}
+	if (size) free(fake);
 	return 0;
 }
 

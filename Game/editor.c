@@ -60,7 +60,8 @@ void menu_addQuestion()
 	question q;
 	fakeAnswer fa;
 	char temp[80],ch,str[1000];
-	int level, amount, i = 0;
+	int i = 0;
+	long level,amount;
 	system("cls");
 	printf("*****************Add Question*******************\n");
 	printf("Select level of question from 1 to 10 (1 is the easiest, 10 is the hardest)\n");
@@ -70,7 +71,7 @@ void menu_addQuestion()
 		level = whileNotInt(temp);
 		if (level < 1 || level>10) printf("Wrong input. Try again\n");
 	} while (level < 1 || level>10);
-	q.level = level;
+	q.level = (int)level;
 	q.answered = 0;
 	while (1)
 	{
@@ -86,7 +87,7 @@ void menu_addQuestion()
 		amount = whileNotInt(temp);
 		if (amount < 1 || amount > 5) printf("Wrong input. Try again\n");
 	} while (amount < 1 || amount > 5);
-	fa.fakeAmount = amount;
+	fa.fakeAmount = (int)amount;
 	for (i = 0; i < amount; i++)
 	{
 		printf("Enter fake answer number %d: ", i + 1);
@@ -95,6 +96,7 @@ void menu_addQuestion()
 			if (!strcmp(q.answer, fa.fakeList[i])) printf("That is the correct answer. Try again\n");
 		} while (!strcmp(q.answer, fa.fakeList[i]));
 	}
+	fflush(stdin);
 	addQuestion(q, fa);
 	_getch();
 	return;
@@ -174,6 +176,7 @@ void menu_studentScore()
 	}
 	printf("Press any key to continue\n");
 	_getch();
+	if (size) free(list);
 	return;
 }
 

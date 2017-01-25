@@ -21,13 +21,13 @@ typedef struct{
 }message;
 
 typedef struct{
-	char str[1000], answer[80];
+	char str[1000], answer[1000];
 	int ID, level, answered; //0 if not answered, 1 if answered
 }question;
 
 typedef struct{
 	int ID,fakeAmount;
-	char fakeList[80][80];
+	char fakeList[5][500];
 }fakeAnswer;
 
 typedef struct{

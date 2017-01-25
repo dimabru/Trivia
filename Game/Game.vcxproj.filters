@@ -42,7 +42,7 @@
     <ClInclude Include="student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\Downloads\MinUnit.h">
+    <ClInclude Include="MinUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -93,6 +93,7 @@ void printUserList(user* list, int size)
 		printUser(list[i]);
 		printf("*******************************\n");
 	}
+	if (size) free(list);
 }
 
 void printStudentList(user *list, int size)
@@ -110,6 +111,7 @@ void printStudentList(user *list, int size)
 		}
 	}
 	if (!cnt) printf("No students in database\n");
+	if (size) free(list);
 	return;
 }
 
@@ -136,18 +138,29 @@ void printQuestionList(question* list, int size)
 		printQuestion(list[i]);
 		printf("************\n");
 	}
+	if (size) free(list);
 	return;
 }
 
 user searchUser(char *id)
 {
-	int i, size = 0;
-	user error, *list = getUsers(&size);
+	int i, size = 0,j;
+	user error, *list = getUsers(&size),found;
 	error.average = -1;
+	error.gamesPlayed = 0;
 	for (i = 0; i < size; i++)
 	{
-		if (!strcmp(list[i].ID, id)) return list[i];
+		if (!strcmp(list[i].ID, id))
+		{
+			found = list[i];
+			if (list[i].gamesPlayed) found.scoreList = (int*)malloc(sizeof(int)*list[i].gamesPlayed);
+			else found.scoreList = NULL;
+			for (j = 0; j < size; j++) if (list[j].gamesPlayed) free(list[j].scoreList);
+			free(list);
+			return found;
+		}
 	}
+	if (size) free(list);
 	return error;
 }
 
@@ -160,6 +173,7 @@ void addUser(user newUser)
 	{
 		newList = (user*)malloc(sizeof(user)*(size + 1));
 		for (i = 0; i < size; i++) newList[i] = list[i];
+		free(list);
 	}
 	else newList = (user*)malloc(sizeof(user));
 	newList[size] = newUser;
@@ -180,8 +194,8 @@ void addQuestion(question q, fakeAnswer fa)
 	}
 	else
 	{
-		q.ID = 0;
-		fa.ID = 0;
+		q.ID = 1;
+		fa.ID = 1;
 	}
 	if (size)
 	{
@@ -189,6 +203,8 @@ void addQuestion(question q, fakeAnswer fa)
 		for (i = 0; i < size; i++) newQ[i] = qList[i];
 		newFA = (fakeAnswer*)malloc(sizeof(fakeAnswer)*(size + 1));
 		for (i = 0; i < size; i++) newFA[i] = faList[i];
+		free(qList);
+		free(faList);
 	}
 	else
 	{
@@ -237,20 +253,34 @@ question searchQuestion(int id)
 {
 	int size,i;
 	question *list = getQuestions(&size);
-	question error;
+	question error,found;
 	error.ID = -1;
 	for (i = 0; i < size; i++)
 	{
-		if (list[i].ID == id) return list[i];
+		if (list[i].ID == id)
+		{
+			found = list[i];
+			free(list);
+			return found;
+		}
 	}
+	if (size) free(list);
 	return error;
 }
 
 fakeAnswer searchFakeAnswer(int id)
 {
 	int size,i;
-	fakeAnswer *list = getFakeAnswers(&size);
-	for (i = 0; i < size; i++) if (list[i].ID == id) return list[i];
+	fakeAnswer *list = getFakeAnswers(&size),found;
+	for (i = 0; i < size; i++)
+	{
+		if (list[i].ID == id)
+		{
+			found = list[i];
+			free(list);
+			return found;
+		}
+	}
 }
 
 void removeQuestion(question q)
@@ -273,6 +303,11 @@ void removeQuestion(question q)
 		setFakeAnswers(newFA, size - 1);
 	}
 	else resetQuestions();
+	if (size)
+	{
+		free(list);
+		free(faList);
+	}
 	return;
 }
 
@@ -290,6 +325,7 @@ int getAverage()
 		}
 	}
 	if (!amount) return 0;
+	if (size) free(list);
 	return sum / amount;
 }
 
@@ -305,6 +341,7 @@ void resetScores()
 		list[i].gamesPlayed = 0;
 		list[i].highScore = 0;
 	}
+	if(size) free(list);
 	return;
 }
 
@@ -369,13 +406,11 @@ void addMessage(message m)
 		nlist[size] = m;
 		free(list);
 		setMessages(nlist, size + 1);
-		free(nlist);
 	}
 	else
 	{
 		strcpy(list[i].msg, m.msg);
 		setMessages(list, size);
-		free(list);
 	}
 	printf("Message added succesfully\n");
 	return;
