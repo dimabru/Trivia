@@ -3,36 +3,36 @@
 #define _files
 #include "general.h"
 
-void setUsers(user*, int);
+int setUsers(user*, int);
 
 user* getUsers(int*);
 
-void resetUsers();
+int resetUsers();
 
-void setQuestions(question*, int);
+int setQuestions(question*, int);
 
 question* getQuestions(int*);
 
-void resetQuestions();
+int resetQuestions();
 
-void setFakeAnswers(fakeAnswer*, int);
+int setFakeAnswers(fakeAnswer*, int);
 
 fakeAnswer* getFakeAnswers(int*);
 
-void setMessages(message*, int);
+int setMessages(message*, int);
 
 message* getMessages(int*);
 
-void setBest(best*, int);
+int setBest(best*, int);
 
 best* getBest(int*);
 
-void setInstructions(char *msg);
+int setInstructions(char *msg);
 
 char* getInstructions();
 
-void setCommentsForDev(char *msg);
+int setCommentsForDev(char *msg);
 
-void resetAll();
+int resetAll();
 
 #endif _files

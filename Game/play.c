@@ -1,6 +1,8 @@
 #include "play.h"
 #define MAX_SIZE 80
-
+/*This function controls the game
+It calls the function show_question and calculates the score according the answers and the time left
+It returns the final score*/
 int start_to_play()
 {
 	//for the for loop;
@@ -95,7 +97,9 @@ question sortQ(int *indexFake)
 	level = 1;
 	return error;
 }
-
+/*This function represent a question and the answers the user need to choose between them.
+the function receive a answer from the user
+if he will enter the correct answer- the function will return 1,if not- will return 0*/
 int show_question()
 {
 	int size = 0, indexFake = 0,i;
@@ -117,9 +121,10 @@ int show_question()
 
 	random = rand();
 	random = random % current.fakeAmount + 1;
-
-	for (i = 0; i < current.fakeAmount + 1; i++)
+	
+	for (i = 0; i < current.fakeAmount+1 ; i++)
 	{
+		
 		if (i < current.fakeAmount)
 		{
 			printf("%d) %s\n", i, current.fakeList[i]);

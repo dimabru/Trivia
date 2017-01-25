@@ -1,6 +1,9 @@
 #include "general.h"
 #include "files.h"
-
+/*This function checks if the str received has char characters
+if yes-it returns -1
+if no- it returns the numbers(the str)
+*/
 long inputCheck(char* str)
 {
 	int i;
@@ -13,7 +16,8 @@ long inputCheck(char* str)
 	if (strlen(str) > 10) return -1;
 	return num;
 }
-
+/*This function checks(with inputCheck function) if the str receives include only numbers
+if it doesn't- it gives the user trying again*/
 long whileNotInt(char* str)
 {
 	long num = inputCheck(str);
@@ -27,7 +31,7 @@ long whileNotInt(char* str)
 	free(arr);
 	return num;
 }
-
+//This function checks if the user sure of doing the action
 int rUsure()
 {
 	char x;
@@ -41,8 +45,8 @@ int rUsure()
 		printf("Wrong input. Try again\n");
 	}
 }
-
-void printUser(user unit)
+//This function prints the user received
+int printUser(user unit)
 {
 	char x[80];
 	int i;
@@ -64,9 +68,10 @@ void printUser(user unit)
 			for (i = 0; i < unit.gamesPlayed; i++) printf("%d) %d\n", i + 1, unit.scoreList[i]);
 		}
 	}
+	return 1;
 }
-
-void printStudent(user unit)
+//This function prints the student received
+int printStudent(user unit)
 {
 	int i;
 	printf("first name: %s\n", unit.firstName);
@@ -80,25 +85,25 @@ void printStudent(user unit)
 		printf("Score List:\n");
 		for (i = 0; i < unit.gamesPlayed; i++) printf("%d) %d\n", i + 1, unit.scoreList[i]);
 	}
-	return;
+	return 1;
 }
-
+//This function prints the list of the users received according the amount
 void printUserList(user* list, int size)
 {
-	int i;
+	int i,print;
 	system("cls");
 	printf("List of users:\n");
 	for (i = 0; i < size; i++)
 	{
-		printUser(list[i]);
+		print=printUser(list[i]);
 		printf("*******************************\n");
 	}
 	if (size) free(list);
 }
-
+//This function prints the list of the students received according the amount
 void printStudentList(user *list, int size)
 {
-	int i,cnt=0;
+	int i,cnt=0,print;
 	system("cls");
 	printf("List of users:\n");
 	for (i = 0; i < size; i++)
@@ -106,7 +111,7 @@ void printStudentList(user *list, int size)
 		if (list[i].userType == student)
 		{
 			cnt++;
-			printUser(list[i]);
+			print=printUser(list[i]);
 			printf("*******************************\n");
 		}
 	}
@@ -114,19 +119,19 @@ void printStudentList(user *list, int size)
 	if (size) free(list);
 	return;
 }
-
-void printQuestion(question q)
+//This function prints the question received
+int printQuestion(question q)
 {
 	printf("ID: %d\n\n", q.ID);
 	printf("Level: %d\n", q.level);
 	printf("%s\n", q.str);
 	printf("Correct Answer: %s\n", q.answer);
-	return;
+	return 1;
 }
-
+//This function prints the list of the questions received according the amount
 void printQuestionList(question* list, int size)
 {
-	int i;
+	int i,prt;
 	if (list == NULL)
 	{
 		printf("No questions to display\n");
@@ -135,13 +140,16 @@ void printQuestionList(question* list, int size)
 	printf("List of questions:\n************\n");
 	for (i = 0; i < size; i++)
 	{
-		printQuestion(list[i]);
+		prt=printQuestion(list[i]);
 		printf("************\n");
 	}
 	if (size) free(list);
 	return;
 }
 
+/*This function search a user according the ID received.
+If it finds it- returns the user
+If not- returns user with id=-1*/
 user searchUser(char *id)
 {
 	int i, size = 0,j;
@@ -163,10 +171,10 @@ user searchUser(char *id)
 	if (size) free(list);
 	return error;
 }
-
-void addUser(user newUser)
+//This function add the user received to the users exist with using the functions set&get users
+int addUser(user newUser)
 {
-	int size=0,i;
+	int size = 0, i, setOK;
 	user *list = getUsers(&size),*newList;
 	char fname[80];
 	if (size)
@@ -175,18 +183,23 @@ void addUser(user newUser)
 		for (i = 0; i < size; i++) newList[i] = list[i];
 		free(list);
 	}
+	
 	else newList = (user*)malloc(sizeof(user));
 	newList[size] = newUser;
-	setUsers(newList, size + 1);
-	printf("User added succesfully\n");
-	return;
+	setOK=setUsers(newList, size + 1);
+	if (setOK)
+	{
+		printf("User added succesfully\n");
+		return 1;
+	}
 }
 
-void addQuestion(question q, fakeAnswer fa)
+//This function add the question and fake answer received to those which exist with using the functions set&get questions+fakeAnswers
+int addQuestion(question q, fakeAnswer fa)
 {
-	int size = 0,i;
-	question *qList = getQuestions(&size),*newQ;
-	fakeAnswer *faList = getFakeAnswers(&size),*newFA;
+	int size = 0, i, res;
+	question *qList = getQuestions(&size), *newQ;
+	fakeAnswer *faList = getFakeAnswers(&size), *newFA;
 	if (size)
 	{
 		q.ID = qList[size - 1].ID + 1;
@@ -213,12 +226,17 @@ void addQuestion(question q, fakeAnswer fa)
 	}
 	newQ[size] = q;
 	newFA[size] = fa;
-	setQuestions(newQ, size + 1);
-	setFakeAnswers(newFA, size + 1);
-	printf("Question added succesfully\n");
-	return;
+	res = setQuestions(newQ, size + 1);
+	if (res)
+		res = setFakeAnswers(newFA, size + 1);
+	if (res)
+	{
+		printf("Question added succesfully\n");
+		return 1;
+	}
+	return 0;
 }
-
+//This function scan a sentence from the user until \0 or \n
 char* scanSentence()
 {
 	char ch, str[1000];
@@ -232,7 +250,7 @@ char* scanSentence()
 	str[i] = '\0';
 	return str;
 }
-
+//This function scan a sentence from the file received until \0 or \n 
 char* fscanfSentence(FILE *fp)
 {
 	char ch, str[1000];
@@ -248,7 +266,9 @@ char* fscanfSentence(FILE *fp)
 	str[i] = '\0';
 	return str;
 }
-
+/*This function search a question according the ID received.
+If it finds it- returns the question
+If not- returns question with id=-1*/
 question searchQuestion(int id)
 {
 	int size,i;
@@ -267,7 +287,9 @@ question searchQuestion(int id)
 	if (size) free(list);
 	return error;
 }
-
+/*This function search a fakeAnswer according the ID received.
+If it finds it- returns the fakeAnswer
+If not- returns fakeAnswer with id=-1*/
 fakeAnswer searchFakeAnswer(int id)
 {
 	int size,i;
@@ -282,10 +304,11 @@ fakeAnswer searchFakeAnswer(int id)
 		}
 	}
 }
-
+/*This funtion remove a question received if it exists
+If it success- it returns 1*/
 void removeQuestion(question q)
 {
-	int size,i,j=0;
+	int size,i,j=0,res;
 	question *list = getQuestions(&size), *newList = (question*)malloc(sizeof(question)*(size-1));
 	fakeAnswer fa = searchFakeAnswer(q.ID),*newFA = (fakeAnswer*)malloc(sizeof(fakeAnswer)*(size-1));
 	fakeAnswer *faList = getFakeAnswers(&size);
@@ -300,6 +323,7 @@ void removeQuestion(question q)
 	if (size > 1)
 	{
 		setQuestions(newList, size - 1);
+		
 		setFakeAnswers(newFA, size - 1);
 	}
 	else resetQuestions();
@@ -308,9 +332,11 @@ void removeQuestion(question q)
 		free(list);
 		free(faList);
 	}
-	return;
+	return 1;
 }
-
+/*This function calculates and returns the average of the users with type student 
+If there are no students- it returns 0 
+*/
 int getAverage()
 {
 	int size = 0,i;
@@ -328,33 +354,36 @@ int getAverage()
 	if (size) free(list);
 	return sum / amount;
 }
-
-void resetScores()
+/*This function reset the scores of the users*/
+int resetScores()
 {
-	int size = 0, i,j;
-	setBest(NULL, 0);
-	user *list = getUsers(&size);
-	for (i = 0; i < size; i++)
+	int res,size = 0, i, j;
+	res = setBest(NULL, 0);
+	if (res)
 	{
-		list[i].average = 0;
-		free(list[i].scoreList);
-		list[i].gamesPlayed = 0;
-		list[i].highScore = 0;
+		user *list = getUsers(&size);
+		for (i = 0; i < size; i++)
+		{
+			list[i].average = 0;
+			free(list[i].scoreList);
+			list[i].gamesPlayed = 0;
+			list[i].highScore = 0;
+		}
+		if (size) free(list);
+		return 1;
 	}
-	if(size) free(list);
-	return;
 }
-
+/*This function change the question received with using the functions removeQuestion and addQuestion*/
 void changeQuestion(question q)
 {
-	int i,amount;
+	int i,amount,prt;
 	question nq;
 	char temp[80];
 	long level;
 	fakeAnswer fa,f=searchFakeAnswer(q.ID);
 	system("cls");
 	printf("Current question information:\n");
-	printQuestion(q);
+	prt=printQuestion(q);
 	printf("Fake answers:\n");
 	for (i = 0; i < f.fakeAmount; i++) printf("%s\n", f.fakeList[i]);
 	printf("************************\n");
@@ -389,13 +418,13 @@ void changeQuestion(question q)
 	nq.ID = q.ID;
 	nq.answered = 0;
 	removeQuestion(q);
-	addQuestion(nq, fa);
-	return;
+	prt=addQuestion(nq, fa);
+	return; 
 }
-
-void addMessage(message m)
+/*This function add the message received to those which exist with using the functions set&get messages*/
+int addMessage(message m)
 {
-	int i, size = 0,j;
+	int i, size = 0, j, res;
 	message *list = getMessages(&size);
 	message *nlist;
 	for (i = 0; i < size; i++) if (!strcmp(m.ID, list[i].ID)) break;
@@ -405,13 +434,17 @@ void addMessage(message m)
 		for (j = 0; j < size; j++) nlist[j] = list[j];
 		nlist[size] = m;
 		free(list);
-		setMessages(nlist, size + 1);
+		res = setMessages(nlist, size + 1);
 	}
 	else
 	{
 		strcpy(list[i].msg, m.msg);
-		setMessages(list, size);
+		res = setMessages(list, size);
 	}
-	printf("Message added succesfully\n");
-	return;
+	if (res)
+	{
+		printf("Message added succesfully\n");
+		return 1;
+	}
+	return 0;
 }
