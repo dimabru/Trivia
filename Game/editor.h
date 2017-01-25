@@ -4,6 +4,7 @@
 
 #include "general.h"
 #include "files.h"
+#include "play.h"
 
 void editor_menu(user edit);
 void menu_addQuestion();
