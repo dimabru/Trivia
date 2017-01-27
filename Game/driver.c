@@ -4,7 +4,7 @@
 #include "play.h"
 #include "student.h"
 #include "MinUnit.h"
-//#include "vld.h"
+#include "vld.h"
 
 void runAllSuite()
 {

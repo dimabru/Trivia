@@ -26,7 +26,7 @@ void editor_menu(user edit)
 		switch (selection)
 		{
 		case 1:
-			start_to_play();
+			start_to_play(edit);
 			break;
 		case 2:
 			menu_addQuestion();

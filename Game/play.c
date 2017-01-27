@@ -145,6 +145,8 @@ int show_question()
 	}
 
 	fflush(stdin);
+
+	scanf("%s", getAnswer);
 	i = whileNotInt(getAnswer);
 
 	if (i == save_correct_answer)
