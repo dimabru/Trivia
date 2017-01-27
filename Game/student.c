@@ -58,7 +58,7 @@ void student_menu_play_game()
 }
 
 /*This function returns the record of the user received.
-If it isn't exist- returns -1 check of the unit testingggggg*/
+If it isn't exist- returns -1 check of the unit testing*/
 int view_current_record(char* id_user)
 {
 	int size, i;
