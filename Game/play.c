@@ -29,12 +29,12 @@ int start_to_play(type uType)
 	else strcpy(UT, "Guide");
 	system("cls");
 	fflush(stdin);
-	printf("*********%s Log in***********\n", UT);
+	printf("*********%s***********\n", UT);
 
 	start_time();
 	for (i = 0; i < NUM_OF_QUESTION; i++)
 	{
-		printf("question number %d\n", i);
+		printf("question number %d\n", i+1);
 		sum += show_question();
 		if (sum != 0)
 		{
@@ -42,7 +42,7 @@ int start_to_play(type uType)
 		}
 		system("cls");
 		fflush(stdin);
-		printf("*********%s Log in***********\n", UT);
+		printf("*********%s***********\n", UT);
 	}
 	start_end();
 
@@ -64,10 +64,10 @@ int start_to_play(type uType)
 	
 	temp = sum_the_time();
 	score = NUM_OF_QUESTION + ((10 * NUM_OF_QUESTION * NUM_OF_QUESTION) / temp) + sum;
-	printf(GREEN"your scoore is %d\n"RESET, score);
+	printf(GREEN"your score is %d\n"RESET, score);
 	printf(GREEN   "************************************************"RESET "\n");
 	printf(YELLOW  "************************************************"RESET "\n");
-	printf("press any key to cuntinue\n");
+	printf("press any key to continue\n");
 	getch();
 
 	//this function return the score so you can enter it to his achivement;
@@ -116,7 +116,7 @@ int show_question()
 	int flagCorrect = 0;
 	int flagFake = 0;
 	int save_correct_answer = 0;
-
+	int counter_of_question = 0;
 	printf("%s\n", show.str);
 
 	current = fake[indexFake];
@@ -135,6 +135,7 @@ int show_question()
 		{
 			printf("%d) %s\n", i, current.fakeList[i]);
 			flagFake = 1;
+			counter_of_question++;
 		}
 		if (i == random && flagCorrect == 0 && flagFake == 0)
 		{
@@ -142,14 +143,21 @@ int show_question()
 			flagCorrect = 1;
 			save_correct_answer = i;
 			i--;
+			counter_of_question++;
 		}
 		flagFake = 0;
 	}
 
 	fflush(stdin);
+	i = -1;
 
-	scanf("%s", getAnswer);
-	i = whileNotInt(getAnswer);
+	while (i < 0 || i > counter_of_question - 1)
+	{
+		printf("please enter number between 0 to %d\n", counter_of_question - 1);
+		scanf("%s", getAnswer);
+		i = whileNotInt(getAnswer);
+	}
+	
 
 	if (i == save_correct_answer)
 	{
