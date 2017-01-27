@@ -41,7 +41,7 @@ int main()
 	//=====================
 	//Runnint the project:
 	//=====================
-	//first_menu();
+	first_menu();
 	
 	//=====================
 	//Runnint Unit tests:

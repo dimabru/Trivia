@@ -8,5 +8,5 @@
 void student_menu(user stud);
 int view_current_record(char*);
 void menu_receivemsg(char*);
-
+void student_menu_play_game(user stud);
 #endif

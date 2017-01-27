@@ -9,6 +9,7 @@ void guide_menu(user);
 void menu_instructions();
 void menu_viewQuestions();
 void menu_sendMessage();
+void menu_play_game(user gid);
 void menu_RD();
 
 #endif _guide

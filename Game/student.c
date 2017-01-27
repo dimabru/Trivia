@@ -22,8 +22,7 @@ void student_menu(user stud)
 		switch (selection)
 		{
 		case 1:
-			system("cls");
-			start_to_play();
+			student_menu_play_game(stud);
 			break;
 		case 2:
 			BestRes = view_current_record(&stud.ID);
@@ -51,6 +50,12 @@ void student_menu(user stud)
 		}
 	}
 }
+
+void student_menu_play_game(user stud)
+{
+	int scoore = start_to_play(stud);
+}
+
 /*This function returns the record of the user received.
 If it isn't exist- returns -1 check of the unit testingggggg*/
 int view_current_record(char* id_user)

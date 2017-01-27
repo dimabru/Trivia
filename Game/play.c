@@ -1,68 +1,72 @@
 #include "play.h"
 #define MAX_SIZE 80
+#define beggining_of 10
+#define difference 10
+
+//for color;
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define RESET   "\x1b[0m"
+
+
 /*This function controls the game
 It calls the function show_question and calculates the score according the answers and the time left
 It returns the final score*/
-int start_to_play()
+int start_to_play(type uType)
 {
 	//for the for loop;
 	int i = 0;
 	int sum = 0;
 	int score = 0;
+	int save_correct_answer = 0;
 	int temp = 0, secLeft = 0, houre = 0;
+	
+
+	char UT[80];
+	if (uType == student) strcpy(UT, "Student");
+	else if (uType == editor) strcpy(UT, "Editor");
+	else strcpy(UT, "Guide");
+	system("cls");
+	fflush(stdin);
+	printf("*********%s Log in***********\n", UT);
+
 	start_time();
-
-
 	for (i = 0; i < NUM_OF_QUESTION; i++)
 	{
+		printf("question number %d\n", i);
 		sum += show_question();
+		if (sum != 0)
+		{
+			save_correct_answer += sum / sum;
+		}
+		system("cls");
+		fflush(stdin);
+		printf("*********%s Log in***********\n", UT);
 	}
 	start_end();
-	if (sum_the_time() < 3)
-	{
-		printf("your score is %d\n", sum + 30);
-		score = sum + 30;
-	}
-	else if (sum_the_time() < 7)
-	{
-		printf("your score is %d\n", sum + 25);
-		score = sum + 25;
-	}
-	else if (sum_the_time() < 10)
-	{
-		printf("your score is %d\n", sum + 20);
-		score = sum + 20;
-	}
-	else if (sum_the_time() < 15)
-	{
-		printf("your score is %d\n", sum + 15);
-		score = sum + 15;
-	}
-	else if (sum_the_time() < 17)
-	{
-		printf("your score is %d\n", sum + 10);
-		score = sum + 10;
-	}
-	else if (sum_the_time() < 20)
-	{
-		printf("your score is %d\n", sum + 5);
-		score = sum + 5;
-	}
-	else if (sum_the_time() > 20)
-	{
-		printf("your score is %d\n", sum);
-		score = sum;
-	}
+
+	printf(YELLOW    "************************************************"    RESET "\n");
+	printf(GREEN   "************************************************"      RESET "\n");
+	printf(GREEN "you answerd %d correct answer\n" RESET, save_correct_answer);
+
+	///to show the user how long time its took him
 	houre = sum_the_time() / 3600;
 	temp = sum_the_time();
-	printf("its took you %d hour", houre);
+	printf(GREEN "its took you %d hour" RESET, houre);
 	secLeft = temp - houre * 3600;
 	//min
 	temp = secLeft / 60;
-	printf(" %d minute", temp);
+	printf(GREEN " %d minute"RESET, temp);
 
 	temp = secLeft - temp * 60;
-	printf(" %d second\n", temp);
+	printf(GREEN" %d second\n"RESET, temp);
+	
+	temp = sum_the_time();
+	score = NUM_OF_QUESTION + ((10 * NUM_OF_QUESTION * NUM_OF_QUESTION) / temp) + sum;
+	printf(GREEN"your scoore is %d\n"RESET, score);
+	printf(GREEN   "************************************************"RESET "\n");
+	printf(YELLOW  "************************************************"RESET "\n");
 	printf("press any key to cuntinue\n");
 	getch();
 
@@ -125,7 +129,7 @@ int show_question()
 	for (i = 0; i < current.fakeAmount+1 ; i++)
 	{
 		
-		if (i < current.fakeAmount)
+		if (i < current.fakeAmount && i != random)
 		{
 			printf("%d) %s\n", i, current.fakeList[i]);
 			flagFake = 1;
@@ -141,9 +145,9 @@ int show_question()
 	}
 
 	fflush(stdin);
-	scanf("%s", getAnswer);
+	i = whileNotInt(getAnswer);
 
-	if (getAnswer == i)
+	if (i == save_correct_answer)
 	{
 		return show.level;
 	}
