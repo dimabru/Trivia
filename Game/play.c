@@ -63,7 +63,15 @@ int start_to_play(type uType)
 	printf(GREEN" %d second\n"RESET, temp);
 	
 	temp = sum_the_time();
-	score = NUM_OF_QUESTION + ((10 * NUM_OF_QUESTION * NUM_OF_QUESTION) / temp) + sum;
+	if (sum > 0)
+	{
+		score = NUM_OF_QUESTION + ((10 * NUM_OF_QUESTION * NUM_OF_QUESTION) / temp) + sum;
+	}
+	else
+	{
+		score = 0;
+	}
+
 	printf(GREEN"your score is %d\n"RESET, score);
 	printf(GREEN   "************************************************"RESET "\n");
 	printf(YELLOW  "************************************************"RESET "\n");
