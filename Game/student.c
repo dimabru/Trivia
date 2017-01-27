@@ -51,9 +51,10 @@ void student_menu(user stud)
 	}
 }
 
-void student_menu_play_game(user stud)
+void student_menu_play_game()
 {
-	int scoore = start_to_play(stud);
+	type utype = student;
+	int scoore = start_to_play(utype);
 }
 
 /*This function returns the record of the user received.

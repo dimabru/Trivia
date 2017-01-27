@@ -4,6 +4,7 @@ void editor_menu(user edit)
 {
 	char temp[80];
 	int selection;
+	type utype = editor;
 	while (1)
 	{
 		system("cls");
@@ -26,7 +27,7 @@ void editor_menu(user edit)
 		switch (selection)
 		{
 		case 1:
-			start_to_play(edit);
+			start_to_play(editor);
 			break;
 		case 2:
 			menu_addQuestion();

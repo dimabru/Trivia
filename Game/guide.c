@@ -28,7 +28,7 @@ void guide_menu(user gid)
 		switch (selection)
 		{
 		case 1:
-			menu_play_game(gid);
+			menu_play_game();
 			break;
 		case 2:
 			menu_instructions();
@@ -60,9 +60,10 @@ void guide_menu(user gid)
 }
 
 //play game guid;
-void menu_play_game(user gid)
+void menu_play_game()
 {
-	int scoore = start_to_play(gid);
+	type uType = guide;
+	int scoore = start_to_play(uType);
 }
 
 /*This function receives instruction from the user with using the functions  setInstructions and getInstructions */
