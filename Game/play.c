@@ -123,7 +123,9 @@ int show_question()
 
 	int c = current.fakeAmount;
 
+	srand(time(NULL));
 	random = rand();
+	
 	random = random % current.fakeAmount + 1;
 	
 	for (i = 0; i < current.fakeAmount+1 ; i++)
