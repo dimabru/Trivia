@@ -114,8 +114,10 @@ int setQuestions(question *list, int size)
 	fprintf(fp, "%d\n", size);
 	for (i = 0; i < size; i++)
 	{
-		fprintf(fp, "%s\n", list[i].str);
-		fprintf(fp, "%s\n", list[i].answer);
+		if (list[i].str) fprintf(fp, "%s\n", list[i].str);
+		else fprintf(fp, "None\n");
+		if (list[i].answer) fprintf(fp, "%s\n", list[i].answer);
+		else fprintf(fp, "None\n");
 		fprintf(fp, "%d\n", list[i].ID);
 		fprintf(fp, "%d\n", list[i].level);
 		fprintf(fp, "%d\n", list[i].answered);
@@ -191,9 +193,13 @@ int setFakeAnswers(fakeAnswer *list, int size)
 	fprintf(fp, "%d\n", size);
 	for (i = 0; i < size; i++)
 	{
-		fprintf(fp, "%d\n", list[i].ID);
+		if (list[i].ID) fprintf(fp, "%d\n", list[i].ID);
 		fprintf(fp, "%d\n", list[i].fakeAmount);
-		for (j = 0; j < list[i].fakeAmount; j++) fprintf(fp, "%s\n", list[i].fakeList[j]);
+		for (j = 0; j < list[i].fakeAmount; j++)
+		{
+			if (list[i].fakeList[j]) fprintf(fp, "%s\n", list[i].fakeList[j]);
+			else fprintf(fp, "None\n");
+		}
 		fprintf(fp, "$\n");
 	}
 	fclose(fp);

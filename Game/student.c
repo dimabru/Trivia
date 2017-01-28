@@ -2,9 +2,18 @@
 /*This function print the menu for a student and calls functions according the option the student enterd*/
 void student_menu(user stud)
 {
-	char temp[80], con;
+	char temp[80], con, msg[1000];
 	int selection = 1, BestRes;
-	while ((selection != 4) && (selection != 3))
+	strcpy(msg, getInstructions());
+	if (strcmp(msg, "None"))
+	{
+		system("cls");
+		printf("Instructions:\n");
+		printf("%s\n\n", msg);
+		printf("Press any key to continue\n");
+		_getch();
+	}
+	while ((selection != 4) && (selection != 5))
 	{
 		system("cls");
 		printf("***********Student: %s %s***************\n", stud.firstName, stud.lastName);
@@ -50,11 +59,57 @@ void student_menu(user stud)
 		}
 	}
 }
-
-void student_menu_play_game()
+/*The function plays game for student and then 
+calculates the result into the score list of the user*/
+void student_menu_play_game(user stud)
 {
-	type utype = student;
-	int scoore = start_to_play(utype);
+	int score = start_to_play(student),sum=0;
+	int size = 0, i, j, *temp, bsize=0;
+	user *list = getUsers(&size);
+	best *blist,*tempList;
+	for (i = 0; i < size; i++) if (!strcmp(list[i].ID, stud.ID)) break;
+	if (stud.highScore < score)
+	{
+		printf("Congratulations. You set a new high score\n");
+		printf("Press any key to continue\n");
+		_getch();
+		list[i].highScore = score;
+		blist = getBest(&bsize);
+		for (j = 0; j < bsize; j++) if (!strcmp(stud.ID, blist[j].ID)) break;
+		if (j < bsize)
+		{
+			blist[j].bestResult = score;
+			setBest(blist, bsize);
+		}
+		else
+		{
+			bsize++;
+			tempList = (best*)malloc(sizeof(best)*bsize);
+			for (j = 0; j < bsize - 1; j++)
+			{
+				tempList[j].bestResult = blist[j].bestResult;
+				strcpy(tempList[j].ID, blist[j].ID);
+			}
+			tempList[j].bestResult = score;
+			strcpy(tempList[j].ID, stud.ID);
+			free(blist);
+			setBest(tempList, bsize);
+		}
+	}
+	list[i].gamesPlayed++;
+	temp = (int*)malloc(sizeof(int)*list[i].gamesPlayed);
+	for (j = 0; j < list[i].gamesPlayed - 1; j++) temp[j] = list[i].scoreList[j];
+	temp[j] = score;
+	free(list[i].scoreList);
+	list[i].scoreList = (int*)malloc(sizeof(int)*list[i].gamesPlayed);
+	for (j = 0; j < list[i].gamesPlayed; j++)
+	{
+		sum += temp[j];
+		list[i].scoreList[j] = temp[j];
+	}
+	free(temp);
+	list[i].average = sum / list[i].gamesPlayed;
+	setUsers(list, size);
 }
 
 /*This function returns the record of the user received.

@@ -50,6 +50,7 @@ void guide_menu(user gid)
 			break;
 		case 8:
 			menu_RD();
+			break;
 		case 9:
 			return;
 		case 10:

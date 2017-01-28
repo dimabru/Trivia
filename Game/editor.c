@@ -203,14 +203,17 @@ void menu_average()
 	{
 		printf("General average: %.2f\n\n", avg);
 	}
-	printf("Enter 0 if you wish to erase all game data from all students and reset scores.\n");
-	printf("To quit enter anything else\n");
-	fflush(stdin);
-	scanf("%c", &ch);
-	if (ch == '0' && rUsure())
+	if (avg)
 	{
-		resetScores();
-		printf("Operation completed successfully\n");
+		printf("Enter 0 if you wish to erase all game data from all students and reset scores.\n");
+		printf("To quit enter anything else\n");
+		fflush(stdin);
+		scanf("%c", &ch);
+		if (ch == '0' && rUsure())
+		{
+			resetScores();
+			printf("Operation completed successfully\n");
+		}
 	}
 	fflush(stdin);
 	printf("Press any key to continue\n");

@@ -33,21 +33,21 @@ $
 65
 a
 C
-We will except an error
+We will expect an error
 $
 8
 5
-design,specifications,evolution,validation
-specifications,testing,design,evolution
-design,testing,validation,evolution
+design, specifications, evolution, validation
+specifications, testing, design, evolution
+design, testing, validation, evolution
 The processes change according the type of the software
-specifications,validation,design,evolution
+specifications, validation, design, evolution
 $
 9
 3
-Process of restructuring exisiting computer code without changing its external bProcess to upgrade the technology on which the software is built without changinProcess in which individual units of source code, the collection of schemas,tables,queries and other objects
-Process to upgrade the technology on which the software is built without changinProcess in which individual units of source code, the collection of schemas,tables,queries and other objects
-Process in which individual units of source code, the collection of schemas,tables,queries and other objects
+Process of restructuring exisiting computer code without changing its external Process to upgrade the technology on which the software is built without changin Process in which individual units of source code, the collection of schemes, tables, queries and other objects
+Process to upgrade the technology on which the software is built without changing Process in which individual units of source code, the collection of schemes, tables, queries and other objects
+Process in which individual units of source code, the collection of schemes, tables, queries and other objects
 $
 10
 5
@@ -59,8 +59,8 @@ lib ____
 $
 11
 5
-Finds bugs early
-Facilitatrs change
+Find bugs early
+Facilitates change
 Simplifies integration
 Provides a source of documentation
 None of the Answers are correct
@@ -74,28 +74,27 @@ client-server
 $
 13
 4
-For present a parametr equals to NULL
-For prevent a function delete data
+To present a parametr equals to NULL
+To prevent a function delete data
 To present comments to the user
 None of the answers are correct
 $
 14
-4
+3
 When a function returns 0 or NULL
-When a function initialize not correctly a parameter
-Answers 1+2 are correct
+When a function doesn't initialize a parameter correctly
 There is no correct answer
 $
 15
 3
 When there are a lot of functions
-Before initializing of parameter
+Before initializing of parameters
 When the class is an abstract class
 $
 16
 4
 QA
-QA+Developers
+QA + Developers
 The manager of the project
 designated team
 $
@@ -115,23 +114,23 @@ $
 19
 4
 The code of the compiler
-A code which uses i abstract class
+A code that uses abstract class
 A code of object oriented language
 Code written in a specific language
 $
 20
 4
-A class that have methods of initializing
+A class that has initializing methods
 A built-in class
-There is no such a class
+There is no such class
 A class which includes an inline function
 $
 21
 4
 It doing actions in the function without return value
 It linked between two functions
-It keeping value without doing actions on it and return it
-It initial the values received
+It keeps value without doing actions on it and return it
+It initializes the values received
 $
 22
 5
@@ -152,7 +151,7 @@ $
 4
 ByteCode
 Arcitecture process
-All the answer are correct
+All the answers are correct
 Templating
 $
 25
@@ -174,7 +173,7 @@ $
 5
 The developers
 QA
-QA+devalopers
+QA + developers
 The manager of the project
 Designated team
 $

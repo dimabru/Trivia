@@ -37,25 +37,17 @@ void running_unit_tests()
 
 int main()
 {
-	int num,i,size=0;
+	int selection;
 	//=====================
-	//Runnint the project:
+	//Running the project:
 	//=====================
-	first_menu();
-	
-	//=====================
-	//Runnint Unit tests:
-	//=====================
-	//running_unit_tests();	
+	printf("Enter 0 for test mode, anything else to start the program\n");
+	scanf("%d", &selection);
+	if (selection) first_menu();
+	else running_unit_tests();
 	printf("=============================\n");
 	printf("bye bye enter any key to exit\n");
 	printf("=============================\n");
 	_getch();
 	return 0;
 }
-
-//searchUser("123");
-//start_to_play();
-//user *list = getUsers(&size);
-//printUserList(list, size);
-//printf("%s\n", list[0].firstName);

@@ -3,6 +3,7 @@
 It includes choosing of the user type*/
 void first_menu()
 {
+	system("cls");
 	int i = 0,res;
 	char get_choose[MAX_SIZE],ch;
 

@@ -9,6 +9,7 @@
 #define YELLOW  "\x1b[33m"
 #define RESET   "\x1b[0m"
 
+question sortQ(int*, int);
 
 /*This function controls the game
 It calls the function show_question and calculates the score according the answers and the time left
@@ -17,10 +18,11 @@ int start_to_play(type uType)
 {
 	//for the for loop;
 	int i = 0;
-	int sum = 0;
+	int sum = 0, check = 0;
 	int score = 0;
 	int save_correct_answer = 0;
 	int temp = 0, secLeft = 0, houre = 0;
+	int size = 0, reset=0;
 	
 
 	char UT[80];
@@ -32,13 +34,15 @@ int start_to_play(type uType)
 	printf("*********%s***********\n", UT);
 
 	start_time();
-	for (i = 0; i < NUM_OF_QUESTION; i++)
+	getQuestions(&size);
+	for (i = 0; i < size; i++)
 	{
-		printf("question number %d\n", i+1);
-		sum += show_question();
-		if (sum != 0)
+		printf("Question number %d\n", i+1);
+		check = show_question();
+		sum += check;
+		if (check)
 		{
-			save_correct_answer += sum / sum;
+			save_correct_answer += 1;
 		}
 		system("cls");
 		fflush(stdin);
@@ -48,19 +52,19 @@ int start_to_play(type uType)
 
 	printf(YELLOW    "************************************************"    RESET "\n");
 	printf(GREEN   "************************************************"      RESET "\n");
-	printf(GREEN "you answerd %d correct answer\n" RESET, save_correct_answer);
+	printf(GREEN "You answered %d correct answers\n" RESET, save_correct_answer);
 
-	///to show the user how long time its took him
+	///to show the user how much time it took him
 	houre = sum_the_time() / 3600;
 	temp = sum_the_time();
-	printf(GREEN "its took you %d hour" RESET, houre);
+	printf(GREEN "it took you %d hour" RESET, houre);
 	secLeft = temp - houre * 3600;
 	//min
 	temp = secLeft / 60;
-	printf(GREEN " %d minute"RESET, temp);
+	printf(GREEN " %d minutes"RESET, temp);
 
 	temp = secLeft - temp * 60;
-	printf(GREEN" %d second\n"RESET, temp);
+	printf(GREEN" %d seconds\n"RESET, temp);
 	
 	temp = sum_the_time();
 	if (sum > 0)
@@ -77,12 +81,12 @@ int start_to_play(type uType)
 	printf(YELLOW  "************************************************"RESET "\n");
 	printf("press any key to continue\n");
 	getch();
-
+	sortQ(&reset, 1);
 	//this function return the score so you can enter it to his achivement;
 	return score;
 }
 
-question sortQ(int *indexFake)
+question sortQ(int *indexFake,int reset)
 {
 	int size,i;
 	static int level = 1;
@@ -90,6 +94,12 @@ question sortQ(int *indexFake)
 	question *list = getQuestions(&size);
 	question error,found;
 	error.level = -1;
+	if (reset)
+	{
+		level = 1;
+		index = -1;
+		return error;
+	}
 	while (level < 11)
 	{
 		for (i = 0; i < size; i++)
@@ -115,7 +125,7 @@ if he will enter the correct answer- the function will return 1,if not- will ret
 int show_question()
 {
 	int size = 0, indexFake = 0,i;
-	question show = sortQ(&indexFake);
+	question show = sortQ(&indexFake,0);
 	fakeAnswer *fake = getFakeAnswers(&size);
 	fakeAnswer current;
 	char getAnswer[MAX_SIZE];
@@ -125,6 +135,10 @@ int show_question()
 	int flagFake = 0;
 	int save_correct_answer = 0;
 	int counter_of_question = 0;
+	printf("LEVEL: %d\n", show.level);
+	printf("*******************\n");
+	printf("ID: %d\n", show.ID);
+	printf("*******************\n");
 	printf("%s\n", show.str);
 
 	current = fake[indexFake];
@@ -141,13 +155,13 @@ int show_question()
 		
 		if (i < current.fakeAmount && i != random)
 		{
-			printf("%d) %s\n", i, current.fakeList[i]);
+			printf("%d) %s\n", i+1, current.fakeList[i]);
 			flagFake = 1;
 			counter_of_question++;
 		}
 		if (i == random && flagCorrect == 0 && flagFake == 0)
 		{
-			printf("%d) %s\n", i, show.answer);
+			printf("%d) %s\n", i+1, show.answer);
 			flagCorrect = 1;
 			save_correct_answer = i;
 			i--;
@@ -159,9 +173,9 @@ int show_question()
 	fflush(stdin);
 	i = -1;
 
-	while (i < 0 || i > counter_of_question - 1)
+	while (i < 1 || i > counter_of_question)
 	{
-		printf("please enter number between 0 to %d\n", counter_of_question - 1);
+		printf("please enter number between 1 to %d\n", counter_of_question);
 		scanf("%s", getAnswer);
 		i = whileNotInt(getAnswer);
 	}

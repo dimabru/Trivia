@@ -11,7 +11,7 @@ i++
 2
 0
 $
-Which of the options does not represent a programing language?
+Which of the options does not represent a programming language?
 ADR
 5
 2
@@ -29,8 +29,8 @@ A
 1
 0
 $
-Which are the option present the processes in software development according the correct ordering?
-specifications,design,validation,evolution
+Which of the following options present the processes in software development in the correct order?
+specifications, design, validation, evolution
 8
 3
 0
@@ -53,7 +53,7 @@ All the answers are correct
 4
 0
 $
-Which type of architecture is the best for process which analyses input and receiving output- without interfering of user?
+Which type of architecture is the best for process which analyses input and receiving output- without user interference?
 Pipe and Filter
 12
 4
@@ -65,19 +65,19 @@ To prevent the program from collapsing in case of an error
 5
 0
 $
-In which case do we have to use a destructor in object oriented programming?
+In which case do we have to use a destructor in c++?
 In case memory was allocated
 14
 6
 0
 $
 Which of the following describes best the motivation to use dynamic memory allocation?
-To minimize memoey usage
+To minimize memory usage
 15
 6
 0
 $
-Who makes unit testing?
+Who is in charge of unit testing?
 Developers
 16
 6
@@ -86,7 +86,7 @@ $
 Which of the following languages is object oriented?
 Python
 17
-7
+1
 0
 $
 Which of the following is a browser based language?
@@ -101,7 +101,7 @@ A general code that has no specific language
 7
 0
 $
-What is an abstract clss?
+What is an abstract class?
 A class that can't be instantiated
 20
 8
@@ -137,8 +137,8 @@ Compiler
 10
 0
 $
-Which option I need to choose if I want to write text in a file, without delete the text that it already includes?
-A
+Which option do I need to choose if I want to write text in a file in C, without deleting the text that it already included?
+a
 26
 10
 0
@@ -161,7 +161,7 @@ stdio.h and stddef.h
 10
 0
 $
-If a variable is a pointer to a structure, then of the following operator is used to access data members of the structure through the pointer variable?
+If a variable is a pointer to a structure, which of the following operators is used to access data members of the structure through the pointer variable?
 ->
 30
 8
@@ -173,14 +173,14 @@ A process to upgrade the technology on which the software is built without chang
 8
 0
 $
-How many types of bolean value exist?
+How many types of boolean values exist?
 2
 32
 1
 0
 $
-What will be the output of this code:int x=5;x+=2.4;printf("%d",x);?
-7.4
+What will be the output of this code: int x=5; x+=2.4; printf("%d",x);?
+7
 33
 2
 0
