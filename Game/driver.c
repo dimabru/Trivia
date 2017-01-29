@@ -12,13 +12,12 @@ void runAllSuite()
 	MU_RUN_SUITE(test_ResultsFunction);
 	MU_RUN_SUITE(test_MSG_firstFunctions);
 	resetAll();
-	//MU_RUN_SUITE(test_UserFunctions);
+	MU_RUN_SUITE(test_UserFunctions);
 	MU_RUN_SUITE(test_QuestionsFunctions);
 	MU_RUN_SUITE(test_MSGFunctions);
 	MU_RUN_SUITE(test_generalFunctions1);
 	MU_RUN_SUITE(test_generalFunctions2);
 	MU_RUN_SUITE(test_generalFunctions3);
-	//MU_RUN_SUITE(test_studentFunctions);
 	MU_RUN_SUITE(test_TimeCalculateFunctions);
 	MU_RUN_SUITE(test_setUsersFunction);
 	MU_RUN_SUITE(test_setQuestionsFunction);
