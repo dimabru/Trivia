@@ -63,7 +63,7 @@ Find bugs early
 Facilitates change
 Simplifies integration
 Provides a source of documentation
-None of the Answers are correct
+For checking user's inputs
 $
 12
 4
@@ -77,7 +77,7 @@ $
 To present a parametr equals to NULL
 To prevent a function delete data
 To present comments to the user
-None of the answers are correct
+For checking user's inputs
 $
 14
 3

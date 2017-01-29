@@ -4,11 +4,15 @@
 #include "play.h"
 #include "student.h"
 #include "MinUnit.h"
-#include "vld.h"
+//#include "vld.h"
 
 void runAllSuite()
 {
-	MU_RUN_SUITE(test_UserFunctions);
+	resetAll();
+	MU_RUN_SUITE(test_ResultsFunction);
+	MU_RUN_SUITE(test_MSG_firstFunctions);
+	resetAll();
+	//MU_RUN_SUITE(test_UserFunctions);
 	MU_RUN_SUITE(test_QuestionsFunctions);
 	MU_RUN_SUITE(test_MSGFunctions);
 	MU_RUN_SUITE(test_generalFunctions1);

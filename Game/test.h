@@ -39,9 +39,11 @@ MU_TEST(test_addUser)
 	strcpy(list.lastName, "last_test");
 	list.highScore = 12;
 	strcpy(list.password, "pass_test");
-	list.scoreList = 0;
+	list.scoreList = malloc(sizeof(1));
+	list.scoreList[0] = 1;
 	list.userType = student;
-	list.gamesPlayed = 0;
+	list.gamesPlayed = 1;
+
 	mu_check(addUser(list) == 1);
 
 }
@@ -155,21 +157,19 @@ MU_TEST(test_inputCheck_t)
 	test = inputCheck("99");
 	mu_check(test != -1);
 }
-/*MU_TEST(test_view_current_record_f)
+MU_TEST(test_view_current_record_f)
 {
 	int test;
-	test = view_current_record("12");
-	if (test != -1)
-		mu_fail("view_current_record didnt return -1\n");
+	test = view_current_record("123");
+	mu_check(test == -1);
 }
 MU_TEST(test_view_current_record_t)
 {
-	//we need to change- if the uer exist and doesnt have a record return 0,else return -1
+
 	int test;
 	test = view_current_record("123");
-	if (test == -1)
-		mu_fail("view_current_record didnt return the score of the user 123\n");
-}*/
+	mu_check(test != -1);
+}
 MU_TEST(test_sum_the_time)
 {
 	int test;
@@ -257,9 +257,73 @@ MU_TEST(test_printQuestion_t)
 	mu_check(test == 1);
 }
 
+MU_TEST(test_SetBest)
+{
+	best* list;
+	int size = 1;
+	list = malloc(sizeof(best)* 1);
+	list[0].bestResult = 12;
+	strcpy(list[0].ID, "123");
+	mu_check(setBest(list, size));
+}
+MU_TEST(test_getBestResult_t)
+{
+	int *size;
+	best* b_test;
+	b_test = getBest(&size);
+	mu_check(size == 1);
+
+}
+MU_TEST(test_getBestResult_f)
+{
+	int *size;
+	best* b_test;
+	b_test = getBest(&size);
+	mu_check(size == 0);
+}
+
 MU_TEST(test_resetScores_t)
 {
 	mu_check(resetScores() == 1);
+}
+MU_TEST(set_Message_first)
+{
+	message* list;
+	int size = 1;
+	list = malloc(sizeof(message)* 1);
+	strcpy(list[0].ID, "123");
+	strcpy(list[0].msg, "test_msg");
+	mu_check(setMessages(list, size));
+}
+MU_TEST(test_getMessage_first)
+{
+	int *size;
+	message* msg_test;
+	msg_test = getMessages(&size);
+	mu_check(size == 1);
+}
+
+
+/*MU_TEST(test_setInstructions)
+{
+char* test_inst=NULL;
+strcpy(*test_inst, "test");
+mu_check(setInstructions(test_inst));
+}*/
+/*MU_TEST(test_getMessage_first)
+{
+int *size;
+message* msg_test;
+msg_test = getMessages(&size);
+mu_check(size == 1);
+}*/
+
+
+
+MU_TEST_SUITE(test_MSG_firstFunctions)
+{
+	MU_RUN_TEST(set_Message_first);
+	MU_RUN_TEST(test_getMessage_first);
 }
 MU_TEST_SUITE(test_UserFunctions)
 {
@@ -309,9 +373,9 @@ MU_TEST_SUITE(test_generalFunctions3)
 }
 /*MU_TEST_SUITE(test_studentFunctions)
 {
-	MU_RUN_TEST(test_view_current_record_f);
-	MU_RUN_TEST(test_addUser);
-	MU_RUN_TEST(test_view_current_record_t);
+MU_RUN_TEST(test_view_current_record_f);
+MU_RUN_TEST(test_addUser);
+MU_RUN_TEST(test_view_current_record_t);
 }*/
 MU_TEST_SUITE(test_TimeCalculateFunctions)
 {
@@ -343,4 +407,12 @@ MU_TEST_SUITE(test_setMessagesFunction)
 	MU_RUN_TEST(test_addMSG);
 	MU_RUN_TEST(test_setMessages);
 }
-#endif 
+MU_TEST_SUITE(test_ResultsFunction)
+{
+	MU_RUN_TEST(test_view_current_record_f);
+	MU_RUN_TEST(test_getBestResult_f);
+	MU_RUN_TEST(test_SetBest);
+	MU_RUN_TEST(test_view_current_record_t);
+	MU_RUN_TEST(test_getBestResult_t);
+}
+#endif
