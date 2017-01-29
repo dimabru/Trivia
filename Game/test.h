@@ -15,60 +15,54 @@ MU_TEST(test_getavg_f)
 {
 	int test;
 	test = getAverage();
-	if (test)
-		mu_fail("getAverage need returns 0\n");
+	mu_check(!test);
 }
 MU_TEST(test_GetUsers)
 {
 	user *temp;
 	int* size;
 	temp = getUsers(&size);
-	if (temp != NULL)
-		mu_fail("getUsers need return null- there are no users\n");
+	mu_check(temp == NULL);
 }
 MU_TEST(test_searchUser)
 {
 	user temp;
 	temp = searchUser("12443");
-	if (temp.average != -1)
-		mu_fail("searchUser doesnt need retyurn -1\n");
+	mu_check(temp.average == -1);
 }
 MU_TEST(test_addUser)
 {
 	user list;
 	strcpy(list.ID, "123");
 	list.average = 12;
-	strcpy(list.firstName, "rre");
-	strcpy(list.lastName, "Sukrun");
+	strcpy(list.firstName, "first_test");
+	strcpy(list.lastName, "last_test");
 	list.highScore = 12;
-	strcpy(list.password, "ko89");
+	strcpy(list.password, "pass_test");
 	list.scoreList = 0;
 	list.userType = student;
 	list.gamesPlayed = 0;
-	mu_check(addUser(list) == 1);// , "addUser didnt return 1\n");
+	mu_check(addUser(list) == 1);
 
 }
 MU_TEST(test_getavg_t)
 {
 	int test;
 	test = getAverage();
-	if (test != 12)
-		mu_fail("getavg didnt return the coorect value\n");
+	mu_check(test == 12);
 }
 MU_TEST(test_GetUsers_S)
 {
 	user *temp;
 	int* size;
 	temp = getUsers(&size);
-	if (temp == NULL)
-		mu_fail("getUsers need return a user- there is a user\n");
+	mu_check(temp != NULL);
 }
 MU_TEST(test_searchUser_S)
 {
 	user temp;
 	temp = searchUser("123");
-	if (temp.average == -1)
-		mu_fail("user exists and searchuser returns an error\n");
+	mu_check(temp.average != -1);
 }
 
 MU_TEST(test_resetQuestion)
@@ -80,15 +74,13 @@ MU_TEST(test_GetQuestions)
 	question *temp;
 	int* size;
 	temp = getQuestions(&size);
-	if (temp != NULL)
-		mu_fail("getQuestions need return null- there are no questions\n");
+	mu_check(temp == NULL);
 }
 MU_TEST(test_searchQuestion)
 {
 	question temp;
 	temp = searchQuestion(1);
-	if (temp.ID != -1)
-		mu_fail("searchQuestion doesnt need return -1\n");
+	mu_check(temp.ID == -1);
 }
 MU_TEST(test_addQuestion)
 {
@@ -102,7 +94,7 @@ MU_TEST(test_addQuestion)
 	list.ID = 1;
 	list.level = 1;
 	strcpy(list.str, "Question1");
-	mu_check(addQuestion(list, fa) == 1);// , "addQuestion didnt return 1\n");
+	mu_check(addQuestion(list, fa) == 1);
 
 }
 MU_TEST(test_GetQuestion_S)
@@ -110,71 +102,58 @@ MU_TEST(test_GetQuestion_S)
 	question *temp;
 	int* size;
 	temp = getQuestions(&size);
-	if (temp == NULL)
-		mu_fail("getQuestions need return a question- there is a question\n");
+	mu_check(temp != NULL);
 }
 MU_TEST(test_searchQuestion_S)
 {
 	question temp;
 	temp = searchQuestion(1);
-	if (temp.ID == -1)
-		mu_fail("question exists and searchquestion returns an error\n");
+	mu_check(temp.ID != -1);
 }
 MU_TEST(test_getFakeAnswers){
 	int* size;
 	fakeAnswer* fa;
 	fa = getFakeAnswers(&size);
-	if (fa == NULL)
-		mu_fail("getFakeAnswers need return a fake answer- there is a fake answer\n");
+	mu_check(fa != NULL);
 }
 MU_TEST(test_searchFakeAnswer)
 {
 	fakeAnswer fa;
 	fa = searchFakeAnswer(1);
-	if (fa.ID != 1)
-		mu_fail("searchFakeUser didnt find the fake answer\n");
+	mu_check(fa.ID == 1);
 }
 MU_TEST(test_getMessage_f)
 {
 	int* size;
 	message* msg;
 	msg = getMessages(&size);
-	if (msg != NULL)
-		mu_fail("getMesasages need return NULL- there are no messages\n");
-
+	mu_check(msg == NULL);
 }
 MU_TEST(test_addMSG)
 {
 	message msg;
 	strcpy(msg.ID, "1");
 	strcpy(msg.msg, "msg_test");
-	mu_check(addMessage(msg) == 1);// , "addMessage didnt return 1\n");
+	mu_check(addMessage(msg) == 1);
 }
 MU_TEST(test_getMessage)
 {
 	int* size;
 	message* msg;
 	msg = getMessages(&size);
-	if (msg == NULL)
-		mu_fail("getMesasages need return messages- there is a message\n");
+	mu_check(msg != NULL);
 }
 MU_TEST(test_inputCheck_f)
 {
 	long test;
 	test = inputCheck("9b");
-	if (test != -1)
-	{
-		mu_fail("The function had need return -1. str includes chars\n");
-	}
+	mu_check(test == -1);
 }
 MU_TEST(test_inputCheck_t)
 {
 	long test;
 	test = inputCheck("99");
-	if (test == -1)
-	{
-		mu_fail("The function had need return the str\n");
-	}
+	mu_check(test != -1);
 }
 /*MU_TEST(test_view_current_record_f)
 {
@@ -195,15 +174,14 @@ MU_TEST(test_sum_the_time)
 {
 	int test;
 	test = sum_the_time();
-	if (test)
-		mu_fail("sum_the_time had return 0 at the begining\n");
+	mu_check(!test);
 }
 MU_TEST(test_setUsers)
 {
 	user* list1;
 	int *size2;
 	list1 = getUsers(&size2);
-	mu_check((setUsers(list1, size2) == 1 || setUsers(list1, size2) == 0));// , "setUsers didnt return 0 or 1\n");
+	mu_check((setUsers(list1, size2) == 1 || setUsers(list1, size2) == 0));
 }
 
 MU_TEST(test_setQuestion)
@@ -211,27 +189,27 @@ MU_TEST(test_setQuestion)
 	question* list1;
 	int *size2;
 	list1 = getQuestions(&size2);
-	mu_check((setQuestions(list1, size2) == 1 || setQuestions(list1, size2) == 0));// , "setQuestions didnt return 0 or 1\n");
+	mu_check((setQuestions(list1, size2) == 1 || setQuestions(list1, size2) == 0));
 }
 MU_TEST(test_setfakeAnswer)
 {
 	fakeAnswer* list1;
 	int *size2;
 	list1 = getFakeAnswers(&size2);
-	mu_check((setFakeAnswers(list1, size2) == 1 || setFakeAnswers(list1, size2) == 0));// , "setFakeAnswers didnt return 0 or 1\n");
+	mu_check((setFakeAnswers(list1, size2) == 1 || setFakeAnswers(list1, size2) == 0));
 }
 MU_TEST(test_setMessages)
 {
 	message* list1;
 	int *size2;
 	list1 = getMessages(&size2);
-	mu_check((setMessages(list1, size2) == 1 || setMessages(list1, size2) == 0));// , "setMessages didnt return 0 or 1\n");
+	mu_check((setMessages(list1, size2) == 1 || setMessages(list1, size2) == 0));
 }
 MU_TEST(test_whileNotInt_t)
 {
 	long test;
 	test = whileNotInt("12");
-	mu_check(test == 12);// , "whileNotInt didnt return 12");
+	mu_check(test == 12);
 }
 MU_TEST(test_printUser_t)
 {
@@ -247,7 +225,7 @@ MU_TEST(test_printUser_t)
 	list.userType = student;
 	list.gamesPlayed = 0;
 	test = printUser(list);
-	mu_check(test == 1);// , "printUser didnt end successfuly");
+	mu_check(test == 1);
 }
 MU_TEST(test_printStudent_t)
 {
@@ -263,7 +241,7 @@ MU_TEST(test_printStudent_t)
 	list.userType = student;
 	list.gamesPlayed = 0;
 	test = printStudent(list);
-	mu_check(test == 1);//, "printStudent didnt didnt end successfuly");
+	mu_check(test == 1);
 }
 
 MU_TEST(test_printQuestion_t)
@@ -276,12 +254,12 @@ MU_TEST(test_printQuestion_t)
 	list.level = 1;
 	strcpy(list.str, "Question1");
 	test = printQuestion(list);
-	mu_check(test == 1);//, "printStudent didnt didnt end successfuly");
+	mu_check(test == 1);
 }
 
 MU_TEST(test_resetScores_t)
 {
-	mu_check(resetScores() == 1);// , "resetScores didnt didnt end successfuly");
+	mu_check(resetScores() == 1);
 }
 MU_TEST_SUITE(test_UserFunctions)
 {
