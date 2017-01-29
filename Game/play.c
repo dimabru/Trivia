@@ -23,7 +23,6 @@ int start_to_play(type uType)
 	int save_correct_answer = 0;
 	int temp = 0, secLeft = 0, houre = 0;
 	int size = 0, reset=0;
-	
 
 	char UT[80];
 	if (uType == student) strcpy(UT, "Student");
@@ -34,7 +33,7 @@ int start_to_play(type uType)
 	printf("*********%s***********\n", UT);
 
 	start_time();
-	getQuestions(&size);
+	free(getQuestions(&size));
 	for (i = 0; i < size; i++)
 	{
 		printf("Question number %d\n", i+1);
@@ -124,7 +123,7 @@ the function receive a answer from the user
 if he will enter the correct answer- the function will return 1,if not- will return 0*/
 int show_question()
 {
-	int size = 0, indexFake = 0,i;
+	int size = 0, indexFake = 0,i,j;
 	question show = sortQ(&indexFake,0);
 	fakeAnswer *fake = getFakeAnswers(&size);
 	fakeAnswer current;
@@ -141,30 +140,36 @@ int show_question()
 	printf("*******************\n");
 	printf("%s\n", show.str);
 
-	current = fake[indexFake];
+	current.fakeAmount = fake[indexFake].fakeAmount;
+	current.ID = fake[indexFake].ID;
+	for (j = 0; j < current.fakeAmount; j++)
+	{
+		strcpy(current.fakeList[j], fake[indexFake].fakeList[j]);
+	}
 
 	int c = current.fakeAmount;
 
 	srand(time(NULL));
 	random = rand();
 	
-	random = random % current.fakeAmount + 1;
+	random = random % (current.fakeAmount +1);
 	
+	j = 0;
+
 	for (i = 0; i < current.fakeAmount+1 ; i++)
 	{
 		
-		if (i < current.fakeAmount && i != random)
+		if (i <= current.fakeAmount && i != random)
 		{
-			printf("%d) %s\n", i+1, current.fakeList[i]);
+			printf("%d) %s\n", i+1, current.fakeList[j++]);
 			flagFake = 1;
 			counter_of_question++;
 		}
-		if (i == random && flagCorrect == 0 && flagFake == 0)
+		else if (i == random && flagCorrect == 0 && flagFake == 0)
 		{
 			printf("%d) %s\n", i+1, show.answer);
 			flagCorrect = 1;
 			save_correct_answer = i;
-			i--;
 			counter_of_question++;
 		}
 		flagFake = 0;
@@ -179,7 +184,7 @@ int show_question()
 		scanf("%s", getAnswer);
 		i = whileNotInt(getAnswer);
 	}
-	
+	save_correct_answer++;
 
 	if (i == save_correct_answer)
 	{
