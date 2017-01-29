@@ -14,7 +14,7 @@ void editor_menu(user edit)
 		printf("2) Add a question\n");
 		printf("3) Delete a question\n");
 		printf("4) View student score\n");
-		printf("5) View user data\n");
+		printf("5) View student data\n");
 		printf("6) View general average\n");
 		printf("7) Change a question\n");
 		printf("8) Log off\n");

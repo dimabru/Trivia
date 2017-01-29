@@ -40,7 +40,7 @@ MU_TEST(test_addUser)
 	list.highScore = 12;
 	strcpy(list.password, "pass_test");
 	list.scoreList = malloc(sizeof(1));
-	list.scoreList[0] = 1;
+	list.scoreList[0] = 12;
 	list.userType = student;
 	list.gamesPlayed = 1;
 

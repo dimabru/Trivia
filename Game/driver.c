@@ -4,7 +4,6 @@
 #include "play.h"
 #include "student.h"
 #include "MinUnit.h"
-//#include "vld.h"
 
 void runAllSuite()
 {
@@ -28,6 +27,9 @@ void runAllSuite()
 void adding_users()
 {
 	user list_stu;
+	user list_gu;
+	user list_ed;
+	best *stud=(best*)malloc(sizeof(best));
 	strcpy(list_stu.ID, "1");
 	list_stu.average = 12;
 	strcpy(list_stu.firstName, "studentf");
@@ -35,35 +37,34 @@ void adding_users()
 	list_stu.highScore = 12;
 	strcpy(list_stu.password, "pass_s");
 	list_stu.scoreList = malloc(sizeof(1));
-	list_stu.scoreList[0] = 1;
+	list_stu.scoreList[0] = 12;
 	list_stu.userType = student;
 	list_stu.gamesPlayed = 1;
+	stud->bestResult = 12;
+	strcpy(stud->ID, "1");
 	addUser(list_stu);
+	setBest(stud, 1);
 	//**************************
-	user list_gu;
+
 	strcpy(list_gu.ID, "2");
-	list_gu.average = 12;
+	list_gu.average = 0;
 	strcpy(list_gu.firstName, "guidef");
 	strcpy(list_gu.lastName, "guidel");
-	list_gu.highScore = 12;
+	list_gu.highScore = 0;
 	strcpy(list_gu.password, "pass_g");
-	list_gu.scoreList = malloc(sizeof(1));
-	list_gu.scoreList[0] = 1;
 	list_gu.userType = guide;
-	list_gu.gamesPlayed = 1;
+	list_gu.gamesPlayed = 0;
 	addUser(list_gu);
 //******************************
-	user list_ed;
+
 	strcpy(list_ed.ID, "3");
-	list_ed.average = 12;
+	list_ed.average = 0;
 	strcpy(list_ed.firstName, "editorf");
 	strcpy(list_ed.lastName, "editorl");
-	list_ed.highScore = 12;
+	list_ed.highScore = 0;
 	strcpy(list_ed.password, "pass_e");
-	list_ed.scoreList = malloc(sizeof(1));
-	list_ed.scoreList[0] = 1;
 	list_ed.userType = editor;
-	list_ed.gamesPlayed = 1;
+	list_ed.gamesPlayed = 0;
 	addUser(list_ed);
 
 }
@@ -88,13 +89,14 @@ int main()
 	//=====================
 	printf("Enter 0 for test mode, anything else to start the program\n");
 	scanf("%d", &selection);
-	if (selection)
+	if (!selection)
 	{
+		running_unit_tests();
 		adding_users();
-		first_menu();
-
+		printf("Press any key to continue\n");
+		_getch();
 	}
-	else running_unit_tests();
+	first_menu();
 	printf("=============================\n");
 	printf("bye bye enter any key to exit\n");
 	printf("=============================\n");
